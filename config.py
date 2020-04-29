@@ -1,15 +1,11 @@
 import os
-
+from local_config import LocalConfig
 
 DIR = os.path.abspath(os.path.dirname(__file__))
 
 
-class Config:
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
+class Config(LocalConfig):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-    SECRET_KEY = "secret"
-    ENV = "development"
 
     BABEL_TRANSLATIONS = [os.path.join(DIR, "data/translations")]
     BABEL_DEFAULT_LOCALE = "hu"
