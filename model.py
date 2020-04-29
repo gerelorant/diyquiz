@@ -397,7 +397,7 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
             'name': self.name,
             'order_number': self.order_number,
             'user': self.user.username,
-            'open': self.open,
+            'open': True,
             'closed': self.closed,
             'questions': [question.as_dict(user, include_content) for question in self.questions
                           if is_host or question.open],
