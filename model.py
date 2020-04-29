@@ -349,8 +349,7 @@ class Quiz(db.Model):
             'name': self.name,
             'start_time': self.start_time.isoformat() if self.start_time else None,
             'end_time': self.end_time.isoformat() if self.end_time else None,
-            'sections': [section.as_dict(user, include_content) for section in self.sections
-                         if section.user_id == user.id or section.open],
+            'sections': [section.as_dict(user, include_content) for section in self.sections],
             'points': sum([section.points(user) for section in self.sections if section.closed])
         }
 
