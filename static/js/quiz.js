@@ -114,7 +114,6 @@ function renderSection(data) {
 }
 
 function renderQuiz(data) {
-    console.log(data);
     var sections = "";
     data.sections.forEach(function (item) {
         sections += renderSection(item);
@@ -132,14 +131,16 @@ function renderQuiz(data) {
 function update(repeat = false) {
     data = repeat ? {} : {'force': true};
     $.getJSON(`/api/quiz/${QUIZ_ID}/`, data, function(data) {
-        $('#quiz').html(renderQuiz(data));
-        $(".question-text, .question-radio").on('change', function(){
-            setAnswer($(this).attr('data-id'));
-        });
-        $('form').on('submit', (evt) => evt.preventDefault());
+        if (data) {
+            $('#quiz').html(renderQuiz(data));
+            $(".question-text, .question-radio").on('change', function(){
+                setAnswer($(this).attr('data-id'));
+            });
+            $('form').on('submit', (evt) => evt.preventDefault());
+        }
     }).always(function() {
         if (repeat) {
-            setTimeout(function() {update(true)}, 1000);
+            setTimeout(function() {update(true)}, 500);
         }
     });
 }

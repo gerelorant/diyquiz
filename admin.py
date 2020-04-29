@@ -67,11 +67,15 @@ class IndexView(AdminIndexView):
         if current_user.is_anonymous:
             return abort(403)
 
+        if force:
+            self.api_updates[(current_user.id, quiz_id)] = (quiz.data(current_user, include_content=False))
+            return jsonify(quiz.data(current_user))
+
         last_data = self.api_updates.get((current_user.id, quiz_id), None)
         data = (quiz.data(current_user, include_content=False))
-        while (not force) and last_data == data:
-            tm.sleep(0.5)
-            data = (quiz.data(current_user, include_content=False))
+
+        if last_data == data:
+            return jsonify(None)
 
         self.api_updates[(current_user.id, quiz_id)] = data
         return jsonify(quiz.data(current_user))
