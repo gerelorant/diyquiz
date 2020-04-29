@@ -377,7 +377,7 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
                 if answer.user_id != user.id:
                     users.add(answer.user)
 
-            return max([self.points(u) for u in users])
+            return max([self.points(u) for u in users]) if users else 0
 
         return sum([ans.points for ans in user.answers.join(Question, Section).filter(Section.id == self.id)])
 
