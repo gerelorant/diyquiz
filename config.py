@@ -1,3 +1,9 @@
+import os
+
+
+DIR = os.path.abspath(os.path.dirname(__file__))
+
+
 class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -5,7 +11,7 @@ class Config:
     SECRET_KEY = "secret"
     ENV = "development"
 
-    BABEL_TRANSLATIONS = ["data/translations"]
+    BABEL_TRANSLATIONS = [os.path.join(DIR, "data/translations")]
     BABEL_DEFAULT_LOCALE = "hu"
     BABEL_DEFAULT_TIMEZONE = "Europe/Budapest"
     LANGUAGES = ["hu"]
