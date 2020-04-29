@@ -452,12 +452,31 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
             'likes': self.likes.count() or 0,
             'liked': bool(user in self.likes),
             'values': [value.text for value in self.values] if self.show_values else None,
-            'answers': {answer.value: (self.container.closed or self.closed) and answer.points for answer in self.answers.filter_by(user_id=user.id).all()},
+            'answers': {answer.value: (self.container.closed or self.closed) and answer.points
+                        for answer in self.answers.filter_by(user_id=user.id).all()},
             'points': self.points(user) if self.container.closed else None,
             'average': self.average if self.closed or self.container.user_id == user.id  else None,
             'correct': [value.text for value in self.values if value.points > 0] if self.container.closed else [],
             'host': self.container.user_id == user.id
         }
+
+    def duplicate(self):
+        question = Question(
+            content=self.content,
+            show_values=self.show_values,
+            max_answers=self.max_answers,
+            base_points=self.base_points,
+            container_id=self.container_id,
+            order_number=Question.get_next_order_number(self.container)
+        )
+        db.session.add(question)
+        for v in self.values:
+            db.session.add(Value(
+                text=v.text,
+                allowed_misses=v.allowed_misses,
+                points=v.points,
+                order_number=v.order_number,
+                question=question))
 
     def __repr__(self) -> str:
         return f"{self.container} {self.order_number}."

@@ -405,6 +405,13 @@ class SectionView(ModelView):
     def delete_view(self):
         return self.check_access() or super().delete_view()
 
+    def create_form(self, obj=None):
+        form = super().create_form(obj)
+        container_id = request.args.get('quiz_id', None)
+        if container_id:
+            form.order_number.data = md.Section.get_next_order_number(md.Quiz.query.get(container_id))
+        return form
+
     def on_model_change(self, form, model, is_created):
         container_id = request.args.get('quiz_id', None)
         if container_id:
@@ -488,11 +495,35 @@ class QuestionView(ModelView):
     def delete_view(self):
         return self.check_access() or super().delete_view()
 
+    @expose('/duplicate/', methods=('POST',))
+    def duplicate(self):
+        question = md.Question.query.get(request.values.get('id', 0))
+        if question is None:
+            return abort(404)
+
+        url = request.values.get('url', request.referrer)
+
+        err = self.check_access()
+        if err:
+            return err
+
+        question.duplicate()
+        md.db.session.commit()
+
+        return redirect(url)
+
+    def create_form(self, obj=None):
+        form = super().create_form(obj)
+        container_id = request.args.get('section_id', None)
+        if container_id:
+            form.order_number.data = md.Question.get_next_order_number(md.Section.query.get(container_id))
+        return form
+
     def on_model_change(self, form, model, is_created):
         container_id = request.args.get('section_id', None)
         if container_id:
             model.container_id = container_id
-        if is_created:
+        if is_created and model.order_number is None:
             model.set_order()
         md.db.session.commit()
 

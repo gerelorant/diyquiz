@@ -19,6 +19,11 @@
         <a class="btn btn-sm btn-warning" href="{{ url_for('question.edit_view', id=question.id, url=request.url + "#question-" + question.id|string) }}">
             <span class="glyphicon glyphicon-pencil"></span>
         </a>
+        <form style="display: inline" method="POST" action="{{ url_for('question.duplicate', id=question.id, url=request.url) }}">
+            <button type="submit" class="btn btn-sm btn-info">
+                <span class="glyphicon glyphicon-copy"></span>
+            </button>
+        </form>
         <form style="display: inline" method="POST" action="{{ url_for('question.delete_view', id=question.id, url=request.url) }}">
             <button type="submit" class="btn btn-sm btn-danger">
                 <span class="glyphicon glyphicon-trash"></span>
