@@ -1,0 +1,266 @@
+# Translations template for PROJECT.
+# Copyright (C) 2020 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-04-29 12:58+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: admin.py:316
+msgid "There are no items in the table."
+msgstr ""
+
+#: admin.py:319
+msgid "Quizzes"
+msgstr ""
+
+#: admin.py:319 admin.py:365 admin.py:426 admin.py:490
+msgid "Editor"
+msgstr ""
+
+#: admin.py:322
+msgid "Hosts"
+msgstr ""
+
+#: admin.py:323 admin.py:371
+msgid "Name"
+msgstr ""
+
+#: admin.py:324
+msgid "Start Time"
+msgstr ""
+
+#: admin.py:325
+msgid "End Time"
+msgstr ""
+
+#: admin.py:326 security.py:15 security.py:33
+msgid "Password"
+msgstr ""
+
+#: admin.py:365
+msgid "Sections"
+msgstr ""
+
+#: admin.py:368
+msgid "User"
+msgstr ""
+
+#: admin.py:369 admin.py:493
+msgid "Quiz"
+msgstr ""
+
+#: admin.py:370 admin.py:430 admin.py:496
+msgid "Order Number"
+msgstr ""
+
+#: admin.py:426
+msgid "Questions"
+msgstr ""
+
+#: admin.py:429 admin.py:494
+msgid "Section"
+msgstr ""
+
+#: admin.py:431
+msgid "Content"
+msgstr ""
+
+#: admin.py:432
+msgid "Show Values"
+msgstr ""
+
+#: admin.py:433
+msgid "Max Answers"
+msgstr ""
+
+#: admin.py:434
+msgid "Base Points"
+msgstr ""
+
+#: admin.py:490
+msgid "Values"
+msgstr ""
+
+#: admin.py:495
+msgid "Question Number"
+msgstr ""
+
+#: admin.py:497
+msgid "Text"
+msgstr ""
+
+#: admin.py:498
+msgid "Allowed Misses"
+msgstr ""
+
+#: admin.py:499
+msgid "Points"
+msgstr ""
+
+#: security.py:10 security.py:29
+msgid "Username"
+msgstr ""
+
+#: security.py:19
+msgid "Confirm Password"
+msgstr ""
+
+#: security.py:23 templates/_quiz_card.html:13 templates/navbar.html:48
+#: templates/security/_menu.html:6 templates/security/register_user.html:3
+msgid "Register"
+msgstr ""
+
+#: security.py:37
+msgid "Remember Me"
+msgstr ""
+
+#: security.py:41 templates/_quiz_card.html:10 templates/navbar.html:43
+msgid "Sign in"
+msgstr ""
+
+#: templates/_quiz_card.html:6
+msgid "Start"
+msgstr ""
+
+#: templates/_quiz_card.html:18
+msgid "Edit"
+msgstr ""
+
+#: templates/index.html:14
+msgid "No quizzes submitted yet."
+msgstr ""
+
+#: templates/navbar.html:32
+msgid "Create quiz"
+msgstr ""
+
+#: templates/navbar.html:37
+#, python-format
+msgid "Sign out (%(user)s)"
+msgstr ""
+
+#: templates/editor/quiz.html:29
+msgid "Add section"
+msgstr ""
+
+#: templates/editor/section.html:50
+msgid "Add value"
+msgstr ""
+
+#: templates/editor/section.html:60
+msgid "Add question"
+msgstr ""
+
+#: templates/security/_menu.html:2
+msgid "Menu"
+msgstr ""
+
+#: templates/security/_menu.html:4 templates/security/login_user.html:3
+msgid "Login"
+msgstr ""
+
+#: templates/security/_menu.html:9
+msgid "Forgot password"
+msgstr ""
+
+#: templates/security/_menu.html:12
+msgid "Confirm account"
+msgstr ""
+
+#: templates/security/change_password.html:3
+msgid "Change Password"
+msgstr ""
+
+#: templates/security/forgot_password.html:3
+msgid "Forgot Password"
+msgstr ""
+
+#: templates/security/reset_password.html:3
+msgid "Reset Password"
+msgstr ""
+
+#: templates/security/send_confirmation.html:3
+msgid "Send Confirmation"
+msgstr ""
+
+#: templates/security/send_login.html:3
+msgid "Send Login"
+msgstr ""
+
+#: templates/security/email/change_notice.html:1
+msgid "Your password has been changed."
+msgstr ""
+
+#: templates/security/email/change_notice.html:3
+msgid "If you did not change your password,"
+msgstr ""
+
+#: templates/security/email/change_notice.html:3
+msgid "click here to reset it"
+msgstr ""
+
+#: templates/security/email/change_notice.txt:1
+msgid "Your password has been changed"
+msgstr ""
+
+#: templates/security/email/change_notice.txt:3
+msgid "If you did not change your password, click the link below to reset it."
+msgstr ""
+
+#: templates/security/email/confirmation_instructions.html:1
+#: templates/security/email/confirmation_instructions.txt:1
+msgid "Please confirm your email through the link below:"
+msgstr ""
+
+#: templates/security/email/confirmation_instructions.html:3
+#: templates/security/email/welcome.html:6
+msgid "Confirm my account"
+msgstr ""
+
+#: templates/security/email/login_instructions.html:1
+#: templates/security/email/login_instructions.txt:1
+#: templates/security/email/welcome.html:1
+#: templates/security/email/welcome.txt:1
+#, python-format
+msgid "Welcome %(email)s!"
+msgstr ""
+
+#: templates/security/email/login_instructions.html:3
+#: templates/security/email/login_instructions.txt:3
+msgid "You can log into your account through the link below:"
+msgstr ""
+
+#: templates/security/email/login_instructions.html:5
+msgid "Login now"
+msgstr ""
+
+#: templates/security/email/reset_instructions.html:1
+msgid "Click here to reset your password"
+msgstr ""
+
+#: templates/security/email/reset_instructions.txt:1
+msgid "Click the link below to reset your password:"
+msgstr ""
+
+#: templates/security/email/reset_notice.html:1
+#: templates/security/email/reset_notice.txt:1
+msgid "Your password has been reset"
+msgstr ""
+
+#: templates/security/email/welcome.html:4
+#: templates/security/email/welcome.txt:4
+msgid "You can confirm your email through the link below:"
+msgstr ""
+

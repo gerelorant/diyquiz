@@ -1,0 +1,12 @@
+email_validator
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-Admin
+Flask-WTF
+Flask-Bootstrap
+Flask-Security
+python-Levenshtein
+SQLAlchemy
+wtforms
+zoomus

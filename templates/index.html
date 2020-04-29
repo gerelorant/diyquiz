@@ -1,0 +1,16 @@
+{% extends 'admin/master.html' %}
+{% from "bootstrap/pagination.html" import render_pagination %}
+
+{% block body %}
+    {% for quiz in quizzes.items %}
+        {% include '_quiz_card.html'%}
+    {% endfor %}
+
+    {% if quizzes.items|length %}
+        <div class="pager">
+            {{ render_pagination(quizzes, prev=None, next=None, ellipses='...') }}
+        </div>
+    {% else %}
+        <p>{{ _('No quizzes submitted yet.') }}</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'admin/base.html' %}
+
+{% block head_css %}
+    {{ super() }}
+    <link href="{{ url_for('static', filename='summernote/summernote.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='summernote-audio/summernote-audio.css') }}" rel="stylesheet">
+    <style>
+        .note-editable {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block page_body %}
+    <div class="container{%if config.get('FLASK_ADMIN_FLUID_LAYOUT', False) %}-fluid{% endif %}">
+    {% block navbar %}
+      {% include "navbar.html" %}
+    {% endblock %}
+
+      {% block messages %}
+      {{ layout.messages() }}
+      {% endblock %}
+
+      {# store the jinja2 context for form_rules rendering logic #}
+      {% set render_ctx = h.resolve_ctx() %}
+
+      {% block body %}{% endblock %}
+    </div>
+{% endblock %}
+
+{% block tail_js %}
+    {{ super() }}
+    <script type="text/javascript" src="{{ url_for('static', filename='summernote/summernote.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='summernote-audio/summernote-audio.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='summernote/lang/summernote-hu-HU.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('textarea').summernote({
+                    lang: 'hu-HU',
+                    toolbar: [
+                        ['undo', ['undo', 'redo']],
+                        ['style', ['style']],
+                        ['font', ['fontname', 'fontsize', 'forecolor']],
+                        ['decoration', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'clear']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['insert', ['table', 'link', 'picture', 'video', 'audio']],
+                        ['view', ['fullscreen', 'codeview', 'help']],
+                    ]
+                });
+            $('input[type=checkbox]').removeClass('form-control').addClass('checkbox');
+            }
+        );
+    </script>
+{% endblock %}

@@ -1,0 +1,54 @@
+h1, h2, h4 {
+    text-align: center;
+}
+
+.question {
+    padding: 1rem;
+}
+
+.question-bar {
+    text-align: right;
+    padding: 1rem;
+}
+
+.section-bar {
+    text-align: center;
+    padding: 1rem;
+}
+
+.form, .form .form-control {
+    text-align: center;
+}
+
+.correct-answers {
+    text-align: center;
+    padding: 1rem;
+}
+
+.has-success label {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.has-feedback .form-control {
+    margin-right: -8rem;
+    padding-right: 1rem;
+}
+
+.form-control-feedback {
+    width: 8rem;
+}
+
+.question-content {
+    text-align: center;
+}
+.question img, .question iframe {
+    max-width: 100%;
+}
+
+.section-points {
+    color: white;
+    background-color: green;
+    border-radius: 4rem;
+    padding: 0.25rem 1rem;
+}

@@ -1,0 +1,18 @@
+{% extends 'admin/master.html' %}
+
+{% block head_css %}
+    {{ super() }}
+    <link href="{{ url_for('static', filename="css/style.css") }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div id="quiz"></div>
+{% endblock %}
+
+{% block tail_js %}
+    {{ super() }}
+    <script>
+        const QUIZ_ID = {{ quiz.id }};
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+{% endblock %}

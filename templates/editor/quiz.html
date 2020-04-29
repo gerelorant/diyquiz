@@ -1,0 +1,39 @@
+{% extends 'admin/model/edit.html' %}
+
+{% block body %}
+    {{ super() }}
+
+    <div class="container" style="max-width:540px">
+
+    <table class="table">
+    {% for section in model.sections %}
+        <tr>
+            <td style="vertical-align: middle">{{ section.order_number }}</td>
+            <td style="vertical-align: middle;width: 100%">{{ section.name }}</td>
+            <td style="vertical-align: middle;white-space: nowrap;text-align: right">
+                {% if section.user_id == current_user.id %}
+                    <a class="btn btn-sm btn-warning" href="{{ url_for('section.edit_view', id=section.id, url=request.url) }}">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <form style="display: inline" method="POST" action="{{ url_for('section.delete_view', id=section.id, url=request.url) }}">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </form>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    <tr>
+        <td style="vertical-align: middle"></td>
+        <td style="vertical-align: middle;width: 100%">{{ _('Add section') }}</td>
+        <td style="vertical-align: middle;white-space: nowrap;text-align: right">
+            <a class="btn btn-sm btn-success" href="{{ url_for('section.create_view', quiz_id=model.id, url=request.url) }}">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>
+        </td>
+    </tr>
+    </table>
+
+    </div>
+{% endblock %}
