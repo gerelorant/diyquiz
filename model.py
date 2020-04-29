@@ -11,7 +11,7 @@ from sqlalchemy.ext.declarative import declared_attr
 
 
 class BaseModel(Model):
-    id_length = 11
+    id_length = 10
 
     @classmethod
     def generate_id(cls):
@@ -22,7 +22,7 @@ class BaseModel(Model):
 
     @declared_attr
     def id(cls):
-        return sa.Column(sa.Integer, default=cls.generate_id, primary_key=True)
+        return sa.Column(sa.Integer, default=cls.generate_id, primary_key=True, autoincrement=False)
 
     @classmethod
     def load_csv(
