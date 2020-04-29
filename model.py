@@ -11,7 +11,7 @@ from sqlalchemy.ext.declarative import declared_attr
 
 
 class BaseModel(Model):
-    id_length = 10
+    id_length = 9
 
     @classmethod
     def generate_id(cls):
