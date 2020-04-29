@@ -388,7 +388,7 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
             if answer.user_id != answer.question.container.user_id:
                 users.add(answer.user)
 
-        return sum([self.points(u) for u in users]) / len(users)
+        return sum([self.points(u) for u in users]) / len(users) or 1
 
     def as_dict(self, user: User, include_content: bool = True) -> dict:
         is_host = self.user_id == user.id
@@ -439,7 +439,7 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
             if answer.user_id != answer.question.container.user_id:
                 users.add(answer.user)
 
-        return sum([self.points(u) for u in users]) / len(users)
+        return sum([self.points(u) for u in users]) / len(users) or 1
 
     def as_dict(self, user: User, include_content: bool = True) -> dict:
         return {
