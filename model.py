@@ -413,6 +413,7 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
     show_values = db.Column(db.Boolean, default=False)
     max_answers = db.Column(db.Integer, default=1)
     base_points = db.Column(db.Integer, default=0)
+    bonus = db.Column(db.Boolean, default=False)
     open = db.Column(db.Boolean, default=False)
     closed = db.Column(db.Boolean, default=False)
 
@@ -440,6 +441,23 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
 
         return sum([self.points(u) for u in users]) / (len(users) or 1)
 
+    def allowed(self, user: User) -> bool:
+        if self.closed:
+            return False
+
+        if self.bonus:
+            ans = Answer.query.join(Question)\
+                .filter(Question.container_id == self.container_id)\
+                .filter(Question.bonus == True)\
+                .filter(Question.id != self.id)\
+                .filter(Answer.user_id == user.id)\
+                .first()
+
+            if ans is not None:
+                return False
+
+        return True
+
     def as_dict(self, user: User, include_content: bool = True) -> dict:
         return {
             'id': self.id,
@@ -448,7 +466,7 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
             'max_answers': self.max_answers,
             'base_points': self.base_points,
             'open': self.open,
-            'closed': self.closed,
+            'closed': not self.allowed(user),
             'likes': self.likes.count() or 0,
             'liked': bool(user in self.likes),
             'values': [value.text for value in self.values] if self.show_values else None,
@@ -457,8 +475,8 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
             'points': self.points(user) if self.container.closed else None,
             'average': self.average if self.closed or self.container.user_id == user.id  else None,
             'correct': [value.text for value in self.values if value.points > 0] if self.container.closed else [],
-            'host': self.container.user_id == user.id
-        }
+            'host': self.container.user_id == user.id,
+            'bonus': self.bonus}
 
     def duplicate(self):
         question = Question(
@@ -466,6 +484,7 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
             show_values=self.show_values,
             max_answers=self.max_answers,
             base_points=self.base_points,
+            bonus=self.bonus,
             container_id=self.container_id,
             order_number=Question.get_next_order_number(self.container)
         )

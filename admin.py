@@ -178,13 +178,13 @@ class IndexView(AdminIndexView):
 
         value = request.json.get('value', None) if request.json else request.values.get('value', None)
 
-        md.db.session.add(md.Answer(
-            value=value,
-            user_id=current_user.id,
-            question_id=question.id
-        ))
+        if value:
+            md.db.session.add(md.Answer(
+                value=value,
+                user_id=current_user.id,
+                question_id=question.id))
+            md.db.session.commit()
 
-        md.db.session.commit()
         return jsonify(None)
 
     @expose('/api/questions/<int:question_id>/clear', methods=['POST'])
@@ -454,7 +454,8 @@ class QuestionView(ModelView):
         'content': _l('Content'),
         'show_values': _l('Show Values'),
         'max_answers': _l('Max Answers'),
-        'base_points': _l('Base Points')
+        'base_points': _l('Base Points'),
+        'bonus': _l('Bonus')
     }
 
     form_excluded_columns = ['container', 'likes', 'values', 'attachments', 'answers', 'open', 'closed']
