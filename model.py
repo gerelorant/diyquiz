@@ -410,6 +410,7 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
 
 class Question(db.Model, ordered_mixin(Section, 'questions')):
     content = db.Column(db.Text(4294000000))
+    answer_content = db.Column(db.Text(4294000000))
     show_values = db.Column(db.Boolean, default=False)
     max_answers = db.Column(db.Integer, default=1)
     base_points = db.Column(db.Integer, default=0)
@@ -459,10 +460,15 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
         return True
 
     def as_dict(self, user: User, include_content: bool = True) -> dict:
+        if include_content:
+            content = self.content if not self.container.closed else self.answer_content or self.content
+        else:
+            content = None
+
         return {
             'id': self.id,
             'order_number': self.order_number,
-            'content': self.content if include_content else None,
+            'content': content,
             'max_answers': self.max_answers,
             'base_points': self.base_points,
             'open': self.open,
@@ -545,8 +551,18 @@ class Answer(db.Model):
                 return value.points
 
         for value in self.question.values.filter(Value.points > 0):
-            val = value.text.strip().lower().replace(' ', '').replace('-', '')
-            text = self.value.strip().lower().replace(' ', '').replace('-', '')
+            val = value.text.strip().lower()\
+                .replace('the ', '')\
+                .replace('a ', '')\
+                .replace('az ', '')\
+                .replace(' ', '')\
+                .replace('-', '')
+            text = self.value.strip().lower()\
+                .replace('the ', '')\
+                .replace('a ', '')\
+                .replace('az ', '')\
+                .replace(' ', '')\
+                .replace('-', '')
             if value.allowed_misses:
                 d = str_distance(val, text)
                 if d < value.allowed_misses:
