@@ -354,6 +354,9 @@ class QuizView(ModelView):
         return md.db.session.query(sa.func.count(md.Quiz.id))
 
     def check_access(self):
+        if current_user.has_role('admin'):
+            return
+
         quiz = md.Quiz.query.get(request.args.get('id'))
         if quiz and current_user not in quiz.hosts:
             return abort(403)
@@ -385,6 +388,9 @@ class SectionView(ModelView):
     edit_template = 'editor/section.html'
 
     def check_access(self):
+        if current_user.has_role('admin'):
+            return
+
         section = md.Section.query.get(request.args.get('id'))
         if section and section.user_id != current_user.id:
             return abort(403)
@@ -475,6 +481,9 @@ class QuestionView(ModelView):
         return query
 
     def check_access(self):
+        if current_user.has_role('admin'):
+            return
+
         question = md.Question.query.get(request.args.get('id'))
         if question and question.container.user_id != current_user.id:
             return abort(403)
@@ -562,6 +571,9 @@ class ValueView(ModelView):
         return query
 
     def check_access(self):
+        if current_user.has_role('admin'):
+            return
+
         value = md.Value.query.get(request.args.get('id'))
         if value and value.question.container.user_id != current_user.id:
             return abort(403)
@@ -588,3 +600,20 @@ class ValueView(ModelView):
         if question_id:
             model.question_id = question_id
         md.db.session.commit()
+
+
+@add_view(_l('Users'), _l('Admin'), md.User)
+class UserView(ModelView):
+    def is_accessible(self) -> bool:
+        return current_user.has_role('admin')
+
+    columns = {
+        'username': _l('Username'),
+        'email': _l('E-mail'),
+        'language': _l('Language'),
+        'roles': _l('Roles'),
+        'registered_at': _l('Registered At'),
+        'active': _l('Active')
+    }
+    column_exclude_list = ['active', 'password']
+    form_excluded_columns = ['password', 'registered_at', 'quizzes', 'sections', 'liked_questions', 'answers']

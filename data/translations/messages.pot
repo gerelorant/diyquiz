@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-04-29 12:58+0200\n"
+"POT-Creation-Date: 2020-04-30 07:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,100 +17,128 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: admin.py:316
+#: admin.py:326
 msgid "There are no items in the table."
 msgstr ""
 
-#: admin.py:319
+#: admin.py:329
 msgid "Quizzes"
 msgstr ""
 
-#: admin.py:319 admin.py:365 admin.py:426 admin.py:490
+#: admin.py:329 admin.py:378 admin.py:449 admin.py:540
 msgid "Editor"
 msgstr ""
 
-#: admin.py:322
+#: admin.py:332
 msgid "Hosts"
 msgstr ""
 
-#: admin.py:323 admin.py:371
+#: admin.py:333 admin.py:384
 msgid "Name"
 msgstr ""
 
-#: admin.py:324
+#: admin.py:334
 msgid "Start Time"
 msgstr ""
 
-#: admin.py:325
+#: admin.py:335
 msgid "End Time"
 msgstr ""
 
-#: admin.py:326 security.py:15 security.py:33
+#: admin.py:336 security.py:15 security.py:33
 msgid "Password"
 msgstr ""
 
-#: admin.py:365
+#: admin.py:378
 msgid "Sections"
 msgstr ""
 
-#: admin.py:368
+#: admin.py:381
 msgid "User"
 msgstr ""
 
-#: admin.py:369 admin.py:493
+#: admin.py:382 admin.py:543
 msgid "Quiz"
 msgstr ""
 
-#: admin.py:370 admin.py:430 admin.py:496
+#: admin.py:383 admin.py:453 admin.py:546
 msgid "Order Number"
 msgstr ""
 
-#: admin.py:426
+#: admin.py:449
 msgid "Questions"
 msgstr ""
 
-#: admin.py:429 admin.py:494
+#: admin.py:452 admin.py:544
 msgid "Section"
 msgstr ""
 
-#: admin.py:431
+#: admin.py:454
 msgid "Content"
 msgstr ""
 
-#: admin.py:432
+#: admin.py:455
 msgid "Show Values"
 msgstr ""
 
-#: admin.py:433
+#: admin.py:456
 msgid "Max Answers"
 msgstr ""
 
-#: admin.py:434
+#: admin.py:457
 msgid "Base Points"
 msgstr ""
 
-#: admin.py:490
+#: admin.py:540
 msgid "Values"
 msgstr ""
 
-#: admin.py:495
+#: admin.py:545
 msgid "Question Number"
 msgstr ""
 
-#: admin.py:497
+#: admin.py:547
 msgid "Text"
 msgstr ""
 
-#: admin.py:498
+#: admin.py:548
 msgid "Allowed Misses"
 msgstr ""
 
-#: admin.py:499
+#: admin.py:549
 msgid "Points"
 msgstr ""
 
-#: security.py:10 security.py:29
+#: admin.py:605
+msgid "Users"
+msgstr ""
+
+#: admin.py:605
+msgid "Admin"
+msgstr ""
+
+#: admin.py:611 security.py:10 security.py:29
 msgid "Username"
+msgstr ""
+
+#: admin.py:612
+msgid "E-mail"
+msgstr ""
+
+#: admin.py:613
+msgid "Language"
+msgstr ""
+
+#: admin.py:614
+msgid "Roles"
+msgstr ""
+
+#: admin.py:615
+msgid "Registered At"
+msgstr ""
+
+#: admin.py:616
+msgid "Active"
 msgstr ""
 
 #: security.py:19
@@ -155,11 +183,11 @@ msgstr ""
 msgid "Add section"
 msgstr ""
 
-#: templates/editor/section.html:50
+#: templates/editor/section.html:55
 msgid "Add value"
 msgstr ""
 
-#: templates/editor/section.html:60
+#: templates/editor/section.html:65
 msgid "Add question"
 msgstr ""
 
