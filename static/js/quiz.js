@@ -24,13 +24,13 @@ function renderQuestion(data) {
             var answer = Object.keys(data.answers).length > i ? Object.keys(data.answers)[i] : "";
             const correct = (data.answers[answer] > 0);
             inputs += `
-                <div class="form-group ${correct ? 'has-success' : (data.correct.length ? 'has-error' : '')} has-feedback">
+                <div class="form-group ${correct ? 'has-success' : (data.correct.length || data.closed ? 'has-error' : '')} has-feedback">
                     <input type="text" class="form-control${sectionClosed || data.closed ? ' disabled' : ''} question-text" 
                         id="question-${data.id}-input" name="question-${data.id}-input" data-id="${data.id}"
                         placeholder="${answer}" value="${answer}" ${sectionClosed || data.closed ? 'disabled' : ''}>
                     <span class="form-control-feedback">
                         ${correct ? data.answers[answer] : ''}
-                        <span class="glyphicon glyphicon-${correct ? 'ok' : (data.correct.length ? 'remove' : '')}"></span>
+                        <span class="glyphicon glyphicon-${correct ? 'ok' : (data.correct.length || data.closed ? 'remove' : '')}"></span>
                     </span>
                 </div>`
         }

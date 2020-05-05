@@ -1,0 +1,6 @@
+{% extends 'admin/master.html' %}
+{% from "bootstrap/wtf.html" import quick_form %}
+
+{% block body %}
+    {{ quick_form(form, form_type='horizontal') }}
+{% endblock %}

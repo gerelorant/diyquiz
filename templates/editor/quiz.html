@@ -28,7 +28,7 @@
         <td style="vertical-align: middle"></td>
         <td style="vertical-align: middle;width: 100%">{{ _('Add section') }}</td>
         <td style="vertical-align: middle;white-space: nowrap;text-align: right">
-            <a class="btn btn-sm btn-success" href="{{ url_for('section.create_view', quiz_id=model.id, url=request.url) }}">
+            <a class="btn btn-sm btn-success" href="{{ url_for('admin.add_section', quiz_id=model.id) }}">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
         </td>

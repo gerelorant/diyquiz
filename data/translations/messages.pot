@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-04-30 07:17+0200\n"
+"POT-Creation-Date: 2020-05-05 10:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,135 +17,206 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: admin.py:326
+#: admin.py:360
 msgid "There are no items in the table."
 msgstr ""
 
-#: admin.py:329
+#: admin.py:363
 msgid "Quizzes"
 msgstr ""
 
-#: admin.py:329 admin.py:378 admin.py:449 admin.py:540
+#: admin.py:363 admin.py:412 admin.py:483 admin.py:575
 msgid "Editor"
 msgstr ""
 
-#: admin.py:332
+#: admin.py:366
 msgid "Hosts"
 msgstr ""
 
-#: admin.py:333 admin.py:384
+#: admin.py:367 admin.py:418 form.py:12
 msgid "Name"
 msgstr ""
 
-#: admin.py:334
+#: admin.py:368
 msgid "Start Time"
 msgstr ""
 
-#: admin.py:335
+#: admin.py:369
 msgid "End Time"
 msgstr ""
 
-#: admin.py:336 security.py:15 security.py:33
+#: admin.py:370 security.py:15 security.py:33
 msgid "Password"
 msgstr ""
 
-#: admin.py:378
+#: admin.py:412
 msgid "Sections"
 msgstr ""
 
-#: admin.py:381
+#: admin.py:415
 msgid "User"
 msgstr ""
 
-#: admin.py:382 admin.py:543
+#: admin.py:416 admin.py:578
 msgid "Quiz"
 msgstr ""
 
-#: admin.py:383 admin.py:453 admin.py:546
+#: admin.py:417 admin.py:487 admin.py:581 form.py:16
 msgid "Order Number"
 msgstr ""
 
-#: admin.py:449
+#: admin.py:483
 msgid "Questions"
 msgstr ""
 
-#: admin.py:452 admin.py:544
+#: admin.py:486 admin.py:579
 msgid "Section"
 msgstr ""
 
-#: admin.py:454
+#: admin.py:488
 msgid "Content"
 msgstr ""
 
-#: admin.py:455
+#: admin.py:489
 msgid "Show Values"
 msgstr ""
 
-#: admin.py:456
+#: admin.py:490
 msgid "Max Answers"
 msgstr ""
 
-#: admin.py:457
+#: admin.py:491
 msgid "Base Points"
 msgstr ""
 
-#: admin.py:540
+#: admin.py:492
+msgid "Bonus"
+msgstr ""
+
+#: admin.py:575
 msgid "Values"
 msgstr ""
 
-#: admin.py:545
+#: admin.py:580
 msgid "Question Number"
 msgstr ""
 
-#: admin.py:547
+#: admin.py:582
 msgid "Text"
 msgstr ""
 
-#: admin.py:548
+#: admin.py:583
 msgid "Allowed Misses"
 msgstr ""
 
-#: admin.py:549
+#: admin.py:584
 msgid "Points"
 msgstr ""
 
-#: admin.py:605
+#: admin.py:640
 msgid "Users"
 msgstr ""
 
-#: admin.py:605
+#: admin.py:640
 msgid "Admin"
 msgstr ""
 
-#: admin.py:611 security.py:10 security.py:29
+#: admin.py:646 security.py:10 security.py:29
 msgid "Username"
 msgstr ""
 
-#: admin.py:612
+#: admin.py:647
 msgid "E-mail"
 msgstr ""
 
-#: admin.py:613
+#: admin.py:648
 msgid "Language"
 msgstr ""
 
-#: admin.py:614
+#: admin.py:649
 msgid "Roles"
 msgstr ""
 
-#: admin.py:615
+#: admin.py:650
 msgid "Registered At"
 msgstr ""
 
-#: admin.py:616
+#: admin.py:651
 msgid "Active"
+msgstr ""
+
+#: form.py:21 form.py:167
+msgid "Number of Questions"
+msgstr ""
+
+#: form.py:25 form.py:58 form.py:97 form.py:175
+msgid "Create Section"
+msgstr ""
+
+#: form.py:37 form.py:70 form.py:112
+#, python-format
+msgid "Question %(num)s"
+msgstr ""
+
+#: form.py:43 form.py:78 form.py:120 form.py:172
+msgid "Answer"
+msgstr ""
+
+#: form.py:54
+msgid "Number of Choices"
+msgstr ""
+
+#: form.py:89 form.py:222
+msgid "Connection"
+msgstr ""
+
+#: form.py:93
+msgid "Opportunities"
+msgstr ""
+
+#: form.py:127
+#, python-format
+msgid "What is the connection? (+%(num)s/-1)"
+msgstr ""
+
+#: form.py:145
+msgid "What is the connection?"
+msgstr ""
+
+#: form.py:188
+#, python-format
+msgid "Statement %(num)s"
+msgstr ""
+
+#: form.py:217
+msgid "Template"
+msgstr ""
+
+#: form.py:220
+msgid "Generic"
+msgstr ""
+
+#: form.py:221
+msgid "Multiple Choice"
+msgstr ""
+
+#: form.py:223
+msgid "Who am I?"
+msgstr ""
+
+#: form.py:226
+msgid "Create from Template"
+msgstr ""
+
+#: form.py:228 form.py:232
+msgid "Load Existing"
 msgstr ""
 
 #: security.py:19
 msgid "Confirm Password"
 msgstr ""
 
-#: security.py:23 templates/_quiz_card.html:13 templates/navbar.html:48
+#: security.py:23 templates/_quiz_card.html:13 templates/navbar.html:53
 #: templates/security/_menu.html:6 templates/security/register_user.html:3
 msgid "Register"
 msgstr ""
@@ -154,7 +225,7 @@ msgstr ""
 msgid "Remember Me"
 msgstr ""
 
-#: security.py:41 templates/_quiz_card.html:10 templates/navbar.html:43
+#: security.py:41 templates/_quiz_card.html:10 templates/navbar.html:48
 msgid "Sign in"
 msgstr ""
 
@@ -171,10 +242,14 @@ msgid "No quizzes submitted yet."
 msgstr ""
 
 #: templates/navbar.html:32
-msgid "Create quiz"
+msgid "Create section"
 msgstr ""
 
 #: templates/navbar.html:37
+msgid "Create quiz"
+msgstr ""
+
+#: templates/navbar.html:42
 #, python-format
 msgid "Sign out (%(user)s)"
 msgstr ""

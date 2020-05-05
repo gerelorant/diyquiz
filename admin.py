@@ -1,7 +1,7 @@
 import datetime as dt
 import time as tm
 
-from flask import current_app, has_app_context, abort, request, redirect, flash, jsonify
+from flask import current_app, has_app_context, abort, request, redirect, flash, jsonify, url_for
 from flask_admin import Admin, expose, AdminIndexView
 from flask_admin.contrib.sqla import ModelView as SQLAlchemyModelView
 from flask_admin.contrib.sqla.filters import EnumEqualFilter
@@ -13,6 +13,7 @@ import sqlalchemy as sa
 import wtforms as wtf
 
 import model as md
+from form import CreateSectionForm, TEMPLATE_FORMS
 
 
 class IndexView(AdminIndexView):
@@ -55,6 +56,39 @@ class IndexView(AdminIndexView):
             return abort(403)
 
         return self.render('editor/quiz.html', quiz=quiz)
+
+    @expose('/add_section', methods=['GET', 'POST'])
+    @expose('/quiz/<int:quiz_id>/add_section', methods=['GET', 'POST'])
+    def add_section(self, quiz_id: int = None):
+        template = request.args.get('template', None)
+        form = TEMPLATE_FORMS.get(template, CreateSectionForm)()
+
+        if isinstance(form, CreateSectionForm):
+            form.existing.choices = [(s.id, s.name) for s in current_user.sections.filter_by(container_id=None)]
+            if request.method == 'POST' and form.validate_on_submit():
+                if form.load_template.data:
+                    return redirect(url_for('admin.add_section', quiz_id=quiz_id, template=form.template.data))
+                elif form.load_existing.data:
+                    section = md.Section.query.get(form.existing.data)
+                    section.container_id = quiz_id
+                    md.db.session.commit()
+                    return redirect(url_for('section.edit_view', id=section.id, url='/'))
+            else:
+                if quiz_id is None:
+                    del(form.existing)
+                    del(form.load_existing)
+                return self.render('editor/template.html', form=form)
+
+        else:
+            if request.method == 'POST' and form.validate_on_submit():
+                if form.submit.data:
+                    quiz = md.Quiz.query.get(quiz_id or 0)
+                    section = form.create(quiz)
+                    md.db.session.commit()
+                    return redirect(url_for('section.edit_view', id=section.id, url='/'))
+
+            return self.render('editor/template.html', form=form)
+
 
     @expose('/api/quiz/<int:quiz_id>/', methods=['GET', 'POST'])
     def quiz_data(self, quiz_id: int):
