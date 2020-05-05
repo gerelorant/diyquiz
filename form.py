@@ -28,7 +28,8 @@ class GenericForm(FlaskForm):
         section = md.Section(
             user_id=current_user.id,
             container=quiz,
-            order_number=self.order_number.data
+            order_number=self.order_number.data,
+            name=self.name.data
         )
         md.db.session.add(section)
 
@@ -61,7 +62,8 @@ class MultipleChoiceForm(GenericForm):
         section = md.Section(
             user_id=current_user.id,
             container=quiz,
-            order_number=self.order_number.data
+            order_number=self.order_number.data,
+            name=self.name.data
         )
         md.db.session.add(section)
 
