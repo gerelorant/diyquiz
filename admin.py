@@ -486,6 +486,7 @@ class QuestionView(ModelView):
         'container': _l('Section'),
         'order_number': _l('Order Number'),
         'content': _l('Content'),
+        'answer_content': _l('Answer Content'),
         'show_values': _l('Show Values'),
         'max_answers': _l('Max Answers'),
         'base_points': _l('Base Points'),

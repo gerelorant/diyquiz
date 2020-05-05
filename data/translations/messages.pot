@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-05-05 10:18+0200\n"
+"POT-Creation-Date: 2020-05-05 10:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Quizzes"
 msgstr ""
 
-#: admin.py:363 admin.py:412 admin.py:483 admin.py:575
+#: admin.py:363 admin.py:412 admin.py:483 admin.py:576
 msgid "Editor"
 msgstr ""
 
@@ -57,11 +57,11 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: admin.py:416 admin.py:578
+#: admin.py:416 admin.py:579
 msgid "Quiz"
 msgstr ""
 
-#: admin.py:417 admin.py:487 admin.py:581 form.py:16
+#: admin.py:417 admin.py:487 admin.py:582 form.py:16
 msgid "Order Number"
 msgstr ""
 
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Questions"
 msgstr ""
 
-#: admin.py:486 admin.py:579
+#: admin.py:486 admin.py:580
 msgid "Section"
 msgstr ""
 
@@ -78,137 +78,141 @@ msgid "Content"
 msgstr ""
 
 #: admin.py:489
-msgid "Show Values"
+msgid "Answer Content"
 msgstr ""
 
 #: admin.py:490
-msgid "Max Answers"
+msgid "Show Values"
 msgstr ""
 
 #: admin.py:491
-msgid "Base Points"
+msgid "Max Answers"
 msgstr ""
 
 #: admin.py:492
+msgid "Base Points"
+msgstr ""
+
+#: admin.py:493
 msgid "Bonus"
 msgstr ""
 
-#: admin.py:575
+#: admin.py:576
 msgid "Values"
 msgstr ""
 
-#: admin.py:580
+#: admin.py:581
 msgid "Question Number"
 msgstr ""
 
-#: admin.py:582
+#: admin.py:583
 msgid "Text"
 msgstr ""
 
-#: admin.py:583
+#: admin.py:584
 msgid "Allowed Misses"
 msgstr ""
 
-#: admin.py:584
+#: admin.py:585
 msgid "Points"
 msgstr ""
 
-#: admin.py:640
+#: admin.py:641
 msgid "Users"
 msgstr ""
 
-#: admin.py:640
+#: admin.py:641
 msgid "Admin"
 msgstr ""
 
-#: admin.py:646 security.py:10 security.py:29
+#: admin.py:647 security.py:10 security.py:29
 msgid "Username"
 msgstr ""
 
-#: admin.py:647
+#: admin.py:648
 msgid "E-mail"
 msgstr ""
 
-#: admin.py:648
+#: admin.py:649
 msgid "Language"
 msgstr ""
 
-#: admin.py:649
+#: admin.py:650
 msgid "Roles"
 msgstr ""
 
-#: admin.py:650
+#: admin.py:651
 msgid "Registered At"
 msgstr ""
 
-#: admin.py:651
+#: admin.py:652
 msgid "Active"
 msgstr ""
 
-#: form.py:21 form.py:167
+#: form.py:21 form.py:169
 msgid "Number of Questions"
 msgstr ""
 
-#: form.py:25 form.py:58 form.py:97 form.py:175
+#: form.py:25 form.py:59 form.py:99 form.py:177
 msgid "Create Section"
 msgstr ""
 
-#: form.py:37 form.py:70 form.py:112
+#: form.py:38 form.py:72 form.py:114
 #, python-format
 msgid "Question %(num)s"
 msgstr ""
 
-#: form.py:43 form.py:78 form.py:120 form.py:172
+#: form.py:44 form.py:80 form.py:122 form.py:174
 msgid "Answer"
 msgstr ""
 
-#: form.py:54
+#: form.py:55
 msgid "Number of Choices"
 msgstr ""
 
-#: form.py:89 form.py:222
+#: form.py:91 form.py:224
 msgid "Connection"
 msgstr ""
 
-#: form.py:93
+#: form.py:95
 msgid "Opportunities"
 msgstr ""
 
-#: form.py:127
+#: form.py:129
 #, python-format
 msgid "What is the connection? (+%(num)s/-1)"
 msgstr ""
 
-#: form.py:145
+#: form.py:147
 msgid "What is the connection?"
 msgstr ""
 
-#: form.py:188
+#: form.py:190
 #, python-format
 msgid "Statement %(num)s"
 msgstr ""
 
-#: form.py:217
+#: form.py:219
 msgid "Template"
 msgstr ""
 
-#: form.py:220
+#: form.py:222
 msgid "Generic"
 msgstr ""
 
-#: form.py:221
+#: form.py:223
 msgid "Multiple Choice"
 msgstr ""
 
-#: form.py:223
+#: form.py:225
 msgid "Who am I?"
 msgstr ""
 
-#: form.py:226
+#: form.py:228
 msgid "Create from Template"
 msgstr ""
 
-#: form.py:228 form.py:232
+#: form.py:230 form.py:234
 msgid "Load Existing"
 msgstr ""
 
