@@ -52,3 +52,14 @@ h1, h2, h4 {
     border-radius: 4rem;
     padding: 0.25rem 1rem;
 }
+
+.total-score {
+    color: white;
+    background-color: green;
+    font-size: large;
+    border-radius: 4rem;
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    padding: 1rem;
+}

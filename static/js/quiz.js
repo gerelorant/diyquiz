@@ -117,15 +117,17 @@ function renderSection(data) {
 
 function renderQuiz(data) {
     var sections = "";
+    var points = 0;
     data.sections.forEach(function (item) {
         sections += renderSection(item);
+        points = item.points ? points + item.points : points;
     });
 
     return `
     <h1 class="quiz-title">${data.name}</h1>
     ${sections}
     <div class="total-score">
-        ${data.points}p
+        ${points}p
     </div>
     `
 }

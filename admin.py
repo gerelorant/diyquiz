@@ -418,7 +418,7 @@ class SectionView(ModelView):
         'name': _l('Name')
     }
     form_excluded_columns = ['questions', 'user', 'open', 'closed', 'container']
-    column_editable_list = ['name']
+    column_editable_list = ['order_number', 'name']
     edit_template = 'editor/section.html'
 
     def check_access(self):
