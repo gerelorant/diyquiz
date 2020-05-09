@@ -101,18 +101,11 @@ class IndexView(AdminIndexView):
         if current_user.is_anonymous:
             return abort(403)
 
-        if force:
-            self.api_updates[(current_user.id, quiz_id)] = (quiz.data(current_user, include_content=False))
+        if force or self.api_updates.get((current_user.id, quiz_id), dt.datetime(1970, 1, 1)) < quiz.last_updated:
+            self.api_updates[(current_user.id, quiz_id)] = dt.datetime.utcnow()
             return jsonify(quiz.data(current_user))
 
-        last_data = self.api_updates.get((current_user.id, quiz_id), None)
-        data = (quiz.data(current_user, include_content=False))
-
-        if last_data == data:
-            return jsonify(None)
-
-        self.api_updates[(current_user.id, quiz_id)] = data
-        return jsonify(quiz.data(current_user))
+        return jsonify(None)
 
     @expose('/api/quiz/<int:quiz_id>/join', methods=['GET', 'POST'])
     def join(self, quiz_id: int):
@@ -142,6 +135,7 @@ class IndexView(AdminIndexView):
             question.likes.remove(current_user)
         else:
             question.likes.append(current_user)
+        question.container.container.last_updated = dt.datetime.utcnow()
         md.db.session.commit()
         return jsonify(None)
 
@@ -155,6 +149,7 @@ class IndexView(AdminIndexView):
             return abort(403)
 
         section.open = not section.open
+        section.container.last_updated = dt.datetime.utcnow()
         md.db.session.commit()
         return jsonify(None)
 
@@ -172,6 +167,7 @@ class IndexView(AdminIndexView):
             for question in section.questions:
                 question.open = False
                 question.closed = True
+        section.container.last_updated = dt.datetime.utcnow()
         md.db.session.commit()
         return jsonify(None)
 
@@ -185,6 +181,7 @@ class IndexView(AdminIndexView):
             return abort(403)
 
         question.open = not question.open
+        question.container.container.last_updated = dt.datetime.utcnow()
         md.db.session.commit()
         return jsonify(None)
 
@@ -198,6 +195,7 @@ class IndexView(AdminIndexView):
             return abort(403)
 
         question.closed = not question.closed
+        question.container.container.last_updated = dt.datetime.utcnow()
         md.db.session.commit()
         return jsonify(None)
 

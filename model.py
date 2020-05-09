@@ -325,6 +325,7 @@ class Quiz(db.Model):
     start_time = db.Column(db.DateTime, default=dt.datetime.utcnow, index=True)
     end_time = db.Column(db.DateTime, index=True)
     password = db.Column(db.String(255))
+    last_updated = db.Column(db.DateTime)
 
     hosts = db.relationship(
         "User",

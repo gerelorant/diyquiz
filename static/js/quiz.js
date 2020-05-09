@@ -45,7 +45,7 @@ function renderQuestion(data) {
     <div id="question-${data.id}" class="jumbotron question">
         <h3>${data.order_number}. ${data.bonnus ? `<span class="glyphicon glyphicon-asterisk"></span> ` : ''}${data.points != null ? `<span class="section-points">${data.points}p</span>` : ''}</h3>
         <div class="question-content ${data.closed ? 'disabled' : 'enabled'}">
-            ${data.content}
+            ${data.content || ''}
             <br>
             ${sectionClosed && data.answer_content ? data.answer_content : ''}
         </div>
@@ -144,7 +144,7 @@ function update(repeat = false) {
         }
     }).always(function() {
         if (repeat) {
-            setTimeout(function() {update(true)}, 5000);
+            setTimeout(function() {update(true)}, 500);
         }
     });
 }
