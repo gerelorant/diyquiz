@@ -144,7 +144,7 @@ function update(repeat = false) {
         }
     }).always(function() {
         if (repeat) {
-            setTimeout(function() {update(true)}, 500);
+            setTimeout(function() {update(true)}, 2000);
         }
     });
 }
