@@ -86,6 +86,44 @@ class MultipleChoiceForm(GenericForm):
         return section
 
 
+class PairingForm(GenericForm):
+    number_of_questions = None
+    answers = wtf.StringField(
+        _l('Answers'),
+        validators=[wtf.validators.DataRequired()]
+    )
+    submit = wtf.SubmitField(_l('Create Section'))
+
+    def create(self, quiz: md.Quiz):
+        section = md.Section(
+            user_id=current_user.id,
+            container=quiz,
+            order_number=self.order_number.data,
+            name=self.name.data
+        )
+        md.db.session.add(section)
+
+        answers = [x.strip() for x in self.answers.data.split(',')]
+
+        for i in range(len(answers)):
+            question = md.Question(
+                content=_('Question %(num)s', num=i+1),
+                order_number=i+1,
+                show_values=True,
+                container=section
+            )
+            md.db.session.add(question)
+            for (j, ans) in enumerate(answers):
+                md.db.session.add(md.Value(
+                    text=ans,
+                    question=question,
+                    order_number=j+1,
+                    points=0
+                ))
+
+        return section
+
+
 class ConnectionForm(GenericForm):
     connection = wtf.StringField(
         _l('Connection'),
@@ -210,6 +248,7 @@ TEMPLATE_FORMS = {
     'generic': GenericForm,
     'multiple': MultipleChoiceForm,
     'connection': ConnectionForm,
+    'pairing': PairingForm,
     'whoami': WhoAmIForm
 }
 
@@ -222,6 +261,7 @@ class CreateSectionForm(FlaskForm):
             ('generic', _l('Generic')),
             ('multiple', _l('Multiple Choice')),
             ('connection', _l('Connection')),
+            ('pairing', _l('Pairing')),
             ('whoami', _l('Who am I?'))
         )
     )

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-05-05 10:55+0200\n"
+"POT-Creation-Date: 2020-05-09 14:27+0200\n"
 "PO-Revision-Date: 2020-04-29 12:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: hu_HU\n"
@@ -150,20 +150,20 @@ msgstr "Regisztráció"
 msgid "Active"
 msgstr "Aktív"
 
-#: form.py:21 form.py:169
+#: form.py:21 form.py:207
 msgid "Number of Questions"
 msgstr "Kérdések száma"
 
-#: form.py:25 form.py:59 form.py:99 form.py:177
+#: form.py:25 form.py:59 form.py:95 form.py:137 form.py:215
 msgid "Create Section"
 msgstr "Blokk létrehozása"
 
-#: form.py:38 form.py:72 form.py:114
+#: form.py:38 form.py:72 form.py:110 form.py:152
 #, python-format
 msgid "Question %(num)s"
 msgstr "%(num)s. Kérdés"
 
-#: form.py:44 form.py:80 form.py:122 form.py:174
+#: form.py:44 form.py:80 form.py:160 form.py:212
 msgid "Answer"
 msgstr "Válasz"
 
@@ -171,49 +171,57 @@ msgstr "Válasz"
 msgid "Number of Choices"
 msgstr "Válaszlehetőségek száma"
 
-#: form.py:91 form.py:224
+#: form.py:92
+msgid "Answers"
+msgstr "Válaszok"
+
+#: form.py:129 form.py:263
 msgid "Connection"
 msgstr "Kapcsolat"
 
-#: form.py:95
+#: form.py:133
 msgid "Opportunities"
 msgstr "Tippelési lehetőségek"
 
-#: form.py:129
+#: form.py:167
 #, python-format
 msgid "What is the connection? (+%(num)s/-1)"
 msgstr "Mi a kapcsolat? (+%(num)s/-1)"
 
-#: form.py:147
+#: form.py:185
 msgid "What is the connection?"
 msgstr "Mi a kapcsolat?"
 
-#: form.py:190
+#: form.py:228
 #, python-format
 msgid "Statement %(num)s"
 msgstr "Állítás %(num)s"
 
-#: form.py:219
+#: form.py:258
 msgid "Template"
 msgstr "Sablon"
 
-#: form.py:222
+#: form.py:261
 msgid "Generic"
 msgstr "Általános"
 
-#: form.py:223
+#: form.py:262
 msgid "Multiple Choice"
 msgstr "Feleletválasztós"
 
-#: form.py:225
+#: form.py:264
+msgid "Pairing"
+msgstr "Párosítás"
+
+#: form.py:265
 msgid "Who am I?"
 msgstr "Ki vagyok én?"
 
-#: form.py:228
+#: form.py:268
 msgid "Create from Template"
 msgstr "Létrehozás sablonból"
 
-#: form.py:230 form.py:234
+#: form.py:270 form.py:274
 msgid "Load Existing"
 msgstr "Meglévő betöltése"
 
