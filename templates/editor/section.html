@@ -30,8 +30,10 @@
             </button>
         </form>
     </h3>
-    <div class="question-content jumbotron">
+    <div class="question-content jumbotron text-center">
         {{ question.content|safe }}
+        <p style="font-size: small;padding: 2rem;">{{ _('Showing only when checking answers:') }}</p>
+        {{ (question.answer_content or '')|safe }}
     </div>
 
     <table class="table">

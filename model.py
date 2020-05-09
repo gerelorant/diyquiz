@@ -460,15 +460,11 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
         return True
 
     def as_dict(self, user: User, include_content: bool = True) -> dict:
-        if include_content:
-            content = self.content if not self.container.closed else self.answer_content or self.content
-        else:
-            content = None
-
         return {
             'id': self.id,
             'order_number': self.order_number,
-            'content': content,
+            'content': self.content if include_content else None,
+            'answer_content': self.answer_content if self.container.closed and include_content else None,
             'max_answers': self.max_answers,
             'base_points': self.base_points,
             'open': self.open,

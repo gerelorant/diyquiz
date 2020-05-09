@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-05-09 14:27+0200\n"
+"POT-Creation-Date: 2020-05-09 14:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,7 +209,7 @@ msgid "Multiple Choice"
 msgstr ""
 
 #: form.py:264
-msgid "Pairing?"
+msgid "Pairing"
 msgstr ""
 
 #: form.py:265
@@ -270,11 +270,15 @@ msgstr ""
 msgid "Add section"
 msgstr ""
 
-#: templates/editor/section.html:55
+#: templates/editor/section.html:35
+msgid "Showing only when checking answers:"
+msgstr ""
+
+#: templates/editor/section.html:57
 msgid "Add value"
 msgstr ""
 
-#: templates/editor/section.html:65
+#: templates/editor/section.html:67
 msgid "Add question"
 msgstr ""
 

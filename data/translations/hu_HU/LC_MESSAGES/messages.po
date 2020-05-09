@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-05-09 14:27+0200\n"
+"POT-Creation-Date: 2020-05-09 14:57+0200\n"
 "PO-Revision-Date: 2020-04-29 12:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: hu_HU\n"
@@ -80,7 +80,7 @@ msgstr "Tartalom"
 
 #: admin.py:489
 msgid "Answer Content"
-msgstr "Megfejtés Tartalom"
+msgstr "Megfejtésnél mutatott extra tartalom"
 
 #: admin.py:490
 msgid "Show Values"
@@ -271,11 +271,15 @@ msgstr "Kijelentkezés (%(user)s)"
 msgid "Add section"
 msgstr "Blokk hozzáadása"
 
-#: templates/editor/section.html:55
+#: templates/editor/section.html:35
+msgid "Showing only when checking answers:"
+msgstr "Csak a megfejtések ellenőrzésénél jelenik meg:"
+
+#: templates/editor/section.html:57
 msgid "Add value"
 msgstr "Válaszlehetőség hozzáadása"
 
-#: templates/editor/section.html:65
+#: templates/editor/section.html:67
 msgid "Add question"
 msgstr "Kérdés hozzáadása"
 

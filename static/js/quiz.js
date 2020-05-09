@@ -46,6 +46,8 @@ function renderQuestion(data) {
         <h3>${data.order_number}. ${data.bonnus ? `<span class="glyphicon glyphicon-asterisk"></span> ` : ''}${data.points != null ? `<span class="section-points">${data.points}p</span>` : ''}</h3>
         <div class="question-content ${data.closed ? 'disabled' : 'enabled'}">
             ${data.content}
+            <br>
+            ${sectionClosed && data.answer_content ? data.answer_content : ''}
         </div>
         <div class="question-bar">
             <div class="btn-group" role="group">
