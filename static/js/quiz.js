@@ -163,7 +163,8 @@ function update(repeat = false) {
 }
 
 function like(id) {
-    $.post(`/api/questions/${id}/like`)
+    $.post(`/api/questions/${id}/like`);
+    $(`#question-${id} button`).attr('disabled', true);
 }
 
 function openQuestion(id) {
