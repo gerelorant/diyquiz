@@ -67,7 +67,10 @@ function renderQuestion(data) {
                 </button>
                 <button type="button" class="btn btn-${data.closed ? 'danger' : 'default'}" onclick="closeQuestion(${data.id})">
                     <span class="glyphicon glyphicon-lock"></span>
-                </button>` : ''}
+                </button>` : `
+                <button type="button" class="btn btn-success ${sectionClosed || data.closed ? 'disabled' : ''}" ${sectionClosed || data.closed ? 'disabled' : ''} onclick="setAnswer(${data.id})">
+                    <span class="glyphicon glyphicon-save"></span>   
+                </button>`}
                 ${data.average != null ? `
                 <button type="button" class="btn btn-default disabled">
                     <span class="glyphicon glyphicon-equalizer"></span> ${data.average}p</span>
@@ -150,9 +153,9 @@ function update(repeat = false) {
     $.getJSON(`/api/quiz/${QUIZ_ID}/`, data, function(data) {
         if (data) {
             $('#quiz').html(renderQuiz(data));
-            $(".question-text, .question-radio").on('change', function(){
+            /*$(".question-text, .question-radio").on('change', function(){
                 setAnswer($(this).attr('data-id'));
-            });
+            });*/
             $('form').on('submit', (evt) => evt.preventDefault());
         }
     }).always(function() {
