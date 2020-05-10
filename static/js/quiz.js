@@ -12,7 +12,6 @@ function renderQuestion(data) {
         ANSWER_CONTENT_CACHE[data.id] = data.answer_content
     }
 
-
     if (data.values != null) {
         data.values.forEach(function (value) {
             const correct = data.correct.includes(value);
@@ -58,7 +57,7 @@ function renderQuestion(data) {
         <div class="question-content ${data.closed ? 'disabled' : 'enabled'}">
             ${CONTENT_CACHE[data.id] || ''}
             <br>
-            ${sectionClosed ? ANSWER_CONTENT_CACHE[data.id] : ''}
+            ${sectionClosed ? ANSWER_CONTENT_CACHE[data.id] || '' : ''}
         </div>
         <div class="question-bar">
             <div class="btn-group" role="group">
