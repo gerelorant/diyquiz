@@ -190,7 +190,6 @@ db = SQLAlchemy(
             "pk": "pk_%(table_name)s"
         }))
 
-
 def name_column(
         length: int = 80,
         nullable: bool = False,
@@ -419,8 +418,8 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
 
 
 class Question(db.Model, ordered_mixin(Section, 'questions')):
-    content = db.Column(db.Text(12800))
-    answer_content = db.Column(db.Text(12800))
+    content = db.deferred(db.Column(db.Text(12800)))
+    answer_content = db.deferred(db.Column(db.Text(12800)))
     show_values = db.Column(db.Boolean, default=False)
     max_answers = db.Column(db.Integer, default=1)
     base_points = db.Column(db.Integer, default=0)
