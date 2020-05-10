@@ -1,6 +1,17 @@
+const CONTENT_CACHE = {};
+const ANSWER_CONTENT_CACHE = {};
+
 function renderQuestion(data) {
     var inputs = "";
     const sectionClosed = !!data.correct.length;
+
+    if (data.content) {
+        CONTENT_CACHE[data.id] = data.content
+    }
+    if (data.answer_content) {
+        ANSWER_CONTENT_CACHE[data.id] = data.answer_content
+    }
+
 
     if (data.values != null) {
         data.values.forEach(function (value) {
@@ -45,9 +56,9 @@ function renderQuestion(data) {
     <div id="question-${data.id}" class="jumbotron question">
         <h3>${data.order_number}. ${data.bonnus ? `<span class="glyphicon glyphicon-asterisk"></span> ` : ''}${data.points != null ? `<span class="section-points">${data.points}p</span>` : ''}</h3>
         <div class="question-content ${data.closed ? 'disabled' : 'enabled'}">
-            ${data.content || ''}
+            ${CONTENT_CACHE[data.id] || ''}
             <br>
-            ${sectionClosed && data.answer_content ? data.answer_content : ''}
+            ${sectionClosed ? ANSWER_CONTENT_CACHE[data.id] : ''}
         </div>
         <div class="question-bar">
             <div class="btn-group" role="group">
@@ -133,7 +144,10 @@ function renderQuiz(data) {
 }
 
 function update(repeat = false) {
-    data = repeat ? {} : {'force': true};
+    data = {'cached_content': Object.keys(CONTENT_CACHE).join(','), 'cached_answers': Object.keys(ANSWER_CONTENT_CACHE).join(',')}
+    if (!repeat) {
+        data.force = true
+    }
     $.getJSON(`/api/quiz/${QUIZ_ID}/`, data, function(data) {
         if (data) {
             $('#quiz').html(renderQuiz(data));
@@ -144,7 +158,7 @@ function update(repeat = false) {
         }
     }).always(function() {
         if (repeat) {
-            setTimeout(function() {update(true)}, 500);
+            setTimeout(function() {update(true)}, 2000);
         }
     });
 }

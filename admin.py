@@ -93,6 +93,8 @@ class IndexView(AdminIndexView):
     @expose('/api/quiz/<int:quiz_id>/', methods=['GET', 'POST'])
     def quiz_data(self, quiz_id: int):
         force = request.args.get('force', False)
+        cached_content = [int(x) if x else 0 for x in request.args.get('cached_content', '0').split(',')]
+        cached_answers = [int(x) if x else 0 for x in request.args.get('cached_answers', '0').split(',')]
 
         quiz = md.Quiz.query.get(quiz_id)
         if quiz is None:
@@ -103,7 +105,9 @@ class IndexView(AdminIndexView):
 
         if force or self.api_updates.get((current_user.id, quiz_id), dt.datetime(1970, 1, 1)) < quiz.last_updated:
             self.api_updates[(current_user.id, quiz_id)] = dt.datetime.utcnow()
-            return jsonify(quiz.data(current_user))
+            resp = quiz.data(current_user, cached_content=cached_content, cached_answers=cached_answers)
+            print(resp)
+            return jsonify(resp)
 
         return jsonify(None)
 

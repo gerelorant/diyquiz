@@ -344,13 +344,18 @@ class Quiz(db.Model):
     def points(self, user: User) -> float:
         return sum([ans.points for ans in user.answers.join(Section, Quiz).filter(Quiz.id == self.id)])
 
-    def data(self, user: User, include_content: bool = True) -> dict:
+    def data(
+            self,
+            user: User,
+            cached_content: list = None,
+            cached_answers: list = None) -> dict:
         return {
             'id': self.id,
             'name': self.name,
             'start_time': self.start_time.isoformat() if self.start_time else None,
             'end_time': self.end_time.isoformat() if self.end_time else None,
-            'sections': [section.as_dict(user, include_content) for section in self.sections],
+            'sections': [section.as_dict(user, cached_content=cached_content, cached_answers=cached_answers)
+                         for section in self.sections],
             'points': sum([section.points(user) for section in self.sections if section.closed])
         }
 
@@ -390,7 +395,11 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
 
         return sum([self.points(u) for u in users]) / (len(users) or 1)
 
-    def as_dict(self, user: User, include_content: bool = True) -> dict:
+    def as_dict(
+            self,
+            user: User,
+            cached_content: list = None,
+            cached_answers: list = None) -> dict:
         is_host = self.user_id == user.id
         return {
             'id': self.id,
@@ -399,8 +408,8 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
             'user': self.user.username,
             'open': True,
             'closed': self.closed,
-            'questions': [question.as_dict(user, include_content) for question in self.questions
-                          if is_host or question.open],
+            'questions': [question.as_dict(user, cached_content=cached_content, cached_answers=cached_answers)
+                          for question in self.questions if is_host or question.open],
             'points': self.points(user) \
                 if self.closed and self.questions.filter_by(open=False).first() is None \
                 else None,
@@ -460,12 +469,16 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
 
         return True
 
-    def as_dict(self, user: User, include_content: bool = True) -> dict:
+    def as_dict(
+            self,
+            user: User,
+            cached_content: list = None,
+            cached_answers: list = None) -> dict:
         return {
             'id': self.id,
             'order_number': self.order_number,
-            'content': self.content if include_content and self.open else None,
-            'answer_content': self.answer_content if self.container.closed and include_content else None,
+            'content': self.content if self.id not in cached_content and self.open else None,
+            'answer_content': self.answer_content if self.container.closed and self.id not in cached_answers else None,
             'max_answers': self.max_answers,
             'base_points': self.base_points,
             'open': self.open,
