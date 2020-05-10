@@ -106,7 +106,6 @@ class IndexView(AdminIndexView):
         if force or self.api_updates.get((current_user.id, quiz_id), dt.datetime(1970, 1, 1)) < quiz.last_updated:
             self.api_updates[(current_user.id, quiz_id)] = dt.datetime.utcnow()
             resp = quiz.data(current_user, cached_content=cached_content, cached_answers=cached_answers)
-            print(resp)
             return jsonify(resp)
 
         return jsonify(None)
