@@ -168,19 +168,23 @@ function like(id) {
 }
 
 function openQuestion(id) {
-    $.post(`/api/questions/${id}/open`)
+    $.post(`/api/questions/${id}/open`);
+    $(`#question-${id} button`).attr('disabled', true);
 }
 
 function closeQuestion(id) {
-    $.post(`/api/questions/${id}/close`)
+    $.post(`/api/questions/${id}/close`);
+    $(`#question-${id} button`).attr('disabled', true);
 }
 
 function openSection(id) {
-    $.post(`/api/sections/${id}/open`)
+    $.post(`/api/sections/${id}/open`);
+    $(`#section-${id} button`).attr('disabled', true);
 }
 
 function closeSection(id) {
-    $.post(`/api/sections/${id}/close`)
+    $.post(`/api/sections/${id}/close`);
+    $(`#section-${id} button`).attr('disabled', true);
 }
 
 function setAnswer(id) {
