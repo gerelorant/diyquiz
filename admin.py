@@ -416,10 +416,11 @@ class SectionView(ModelView):
         'user': _l('User'),
         'container': _l('Quiz'),
         'order_number': _l('Order Number'),
-        'name': _l('Name')
+        'name': _l('Name'),
+        'closed': _l('Closed')
     }
     form_excluded_columns = ['questions', 'user', 'open', 'closed', 'container']
-    column_editable_list = ['order_number', 'name']
+    column_editable_list = ['order_number', 'name', 'closed']
     edit_template = 'editor/section.html'
 
     def check_access(self):
@@ -459,7 +460,8 @@ class SectionView(ModelView):
             model.container_id = container_id
         if is_created and model.order_number is None:
             model.set_order()
-        model.user = current_user
+        if model.user is None:
+            model.user = current_user
         md.db.session.commit()
 
     def get_query(self):
@@ -491,11 +493,14 @@ class QuestionView(ModelView):
         'show_values': _l('Show Values'),
         'max_answers': _l('Max Answers'),
         'base_points': _l('Base Points'),
-        'bonus': _l('Bonus')
+        'bonus': _l('Bonus'),
+        'open': _l('Visible'),
+        'closed': _l('Closed')
     }
 
     form_excluded_columns = ['container', 'likes', 'values', 'attachments', 'answers', 'open', 'closed']
-    column_exclude_list = ['content', 'open', 'closed']
+    column_exclude_list = ['content', 'answer_content']
+    column_editable_list = ['open', 'closed']
 
     def get_query(self):
         query = md.db.session.query(md.Question)\
@@ -637,6 +642,48 @@ class ValueView(ModelView):
         if question_id:
             model.question_id = question_id
         md.db.session.commit()
+
+
+@add_view(_l('Answers'), _l('Editor'), md.Answer)
+class AnswerView(ModelView):
+    columns = {
+        'question.container.container': _l('Quiz'),
+        'question.container': _l('Section'),
+        'question.order_number': _l('Question Number'),
+        'user.username': _l('Username'),
+        'value': _l('Answer'),
+        'points': _l('Points')
+    }
+    column_filters = ['user.username']
+
+    def can_create(self) -> bool:
+        return current_user.has_role('admin')
+
+    def can_edit(self) -> bool:
+        return current_user.has_role('admin')
+
+    def can_delete(self) -> bool:
+        return current_user.has_role('admin')
+
+    def get_query(self):
+        query = md.db.session.query(md.Answer)\
+            .join(md.Question).join(md.Section)\
+            .order_by(md.Section.container_id, md.Section.order_number, md.Question.order_number)
+
+        if not current_user.has_role('admin'):
+            query = query.filter(md.Section.user_id == current_user.id)
+
+        return query
+
+    def get_count_query(self):
+        query = md.db.session.query(sa.func.count(md.Answer.id))\
+            .join(md.Question).join(md.Section)\
+            .order_by(md.Section.container_id, md.Section.order_number, md.Question.order_number)
+
+        if not current_user.has_role('admin'):
+            query = query.filter(md.Section.user_id == current_user.id)
+
+        return query
 
 
 @add_view(_l('Users'), _l('Admin'), md.User)

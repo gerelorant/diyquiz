@@ -513,7 +513,7 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
                 question=question))
 
     def __repr__(self) -> str:
-        return f"{self.container} {self.order_number}."
+        return f"{self.container.container or ''} / {self.container} / {self.order_number}."
 
 
 class Value(db.Model):
