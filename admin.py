@@ -46,6 +46,17 @@ class IndexView(AdminIndexView):
 
         return self.render('quiz.html', quiz=quiz)
 
+    @expose('/quiz/<int:quiz_id>/static')
+    def quiz_static(self, quiz_id: int):
+        quiz = md.Quiz.query.get(quiz_id)
+        if quiz is None:
+            return abort(404)
+
+        if current_user.is_anonymous:
+            return abort(403)
+
+        return self.render('quiz_static.html', quiz=quiz)
+
     @expose('/quiz/<int:quiz_id>/edit')
     def edit_quiz(self, quiz_id: int):
         quiz = md.Quiz.query.get(quiz_id)

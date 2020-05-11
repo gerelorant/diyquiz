@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-05-09 14:57+0200\n"
+"POT-Creation-Date: 2020-05-11 17:18+0200\n"
 "PO-Revision-Date: 2020-04-29 12:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: hu_HU\n"
@@ -18,135 +18,153 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: admin.py:360
+#: admin.py:376
 msgid "There are no items in the table."
 msgstr "Üres táblázat."
 
-#: admin.py:363
+#: admin.py:379
 msgid "Quizzes"
 msgstr "Kvízek"
 
-#: admin.py:363 admin.py:412 admin.py:483 admin.py:576
+#: admin.py:379 admin.py:428 admin.py:501 admin.py:597 admin.py:662
 msgid "Editor"
 msgstr "Szerkesztő"
 
-#: admin.py:366
+#: admin.py:382
 msgid "Hosts"
 msgstr "Szervezők"
 
-#: admin.py:367 admin.py:418 form.py:12
+#: admin.py:383 admin.py:434 form.py:12
 msgid "Name"
 msgstr "Név"
 
-#: admin.py:368
+#: admin.py:384
 msgid "Start Time"
 msgstr "Kezdő idő"
 
-#: admin.py:369
+#: admin.py:385
 msgid "End Time"
 msgstr "Vége idő"
 
-#: admin.py:370 security.py:15 security.py:33
+#: admin.py:386 security.py:15 security.py:33
 msgid "Password"
 msgstr "Jelszó"
 
-#: admin.py:412
+#: admin.py:428
 msgid "Sections"
 msgstr "Blokkok"
 
-#: admin.py:415
+#: admin.py:431
 msgid "User"
 msgstr "Felhasználó"
 
-#: admin.py:416 admin.py:579
+#: admin.py:432 admin.py:600 admin.py:665
 msgid "Quiz"
 msgstr "Kvíz"
 
-#: admin.py:417 admin.py:487 admin.py:582 form.py:16
+#: admin.py:433 admin.py:505 admin.py:603 form.py:16
 msgid "Order Number"
 msgstr "Sorszám"
 
-#: admin.py:483
+#: admin.py:435 admin.py:513
+msgid "Closed"
+msgstr "Lezárt"
+
+#: admin.py:501 templates/quiz_static.html:33
 msgid "Questions"
 msgstr "Kérdések"
 
-#: admin.py:486 admin.py:580
+#: admin.py:504 admin.py:601 admin.py:666
 msgid "Section"
 msgstr "Blokk"
 
-#: admin.py:488
+#: admin.py:506
 msgid "Content"
 msgstr "Tartalom"
 
-#: admin.py:489
+#: admin.py:507
 msgid "Answer Content"
 msgstr "Megfejtésnél mutatott extra tartalom"
 
-#: admin.py:490
+#: admin.py:508
 msgid "Show Values"
 msgstr "Válaszlehetőségek mutatása"
 
-#: admin.py:491
+#: admin.py:509
 msgid "Max Answers"
 msgstr "Válaszok száma"
 
-#: admin.py:492
+#: admin.py:510
 msgid "Base Points"
 msgstr "Alap pontszám"
 
-#: admin.py:493
+#: admin.py:511
 msgid "Bonus"
 msgstr "Bónusz"
 
-#: admin.py:576
+#: admin.py:512
+msgid "Visible"
+msgstr "Látható"
+
+#: admin.py:597
 msgid "Values"
 msgstr "Értékek"
 
-#: admin.py:581
+#: admin.py:602 admin.py:667
 msgid "Question Number"
 msgstr "Kérdésszám"
 
-#: admin.py:583
+#: admin.py:604
 msgid "Text"
 msgstr "Szöveg"
 
-#: admin.py:584
+#: admin.py:605
 msgid "Allowed Misses"
 msgstr "Megengedett tévesztések"
 
-#: admin.py:585
+#: admin.py:606 admin.py:670 templates/_quiz_card.html:14
 msgid "Points"
 msgstr "Pontszám"
 
-#: admin.py:641
-msgid "Users"
-msgstr "Felhasználók"
+#: admin.py:662 form.py:92
+msgid "Answers"
+msgstr "Válaszok"
 
-#: admin.py:641
-msgid "Admin"
-msgstr "Rendszergazda"
-
-#: admin.py:647 security.py:10 security.py:29
+#: admin.py:668 admin.py:710 security.py:10 security.py:29
+#: templates/_quiz_card.html:11
 msgid "Username"
 msgstr "Felhasználónév"
 
-#: admin.py:648
+#: admin.py:669 form.py:44 form.py:80 form.py:160 form.py:212
+#: templates/quiz_static.html:34
+msgid "Answer"
+msgstr "Válasz"
+
+#: admin.py:704
+msgid "Users"
+msgstr "Felhasználók"
+
+#: admin.py:704
+msgid "Admin"
+msgstr "Rendszergazda"
+
+#: admin.py:711
 msgid "E-mail"
 msgstr "E-mail"
 
-#: admin.py:649
+#: admin.py:712
 msgid "Language"
 msgstr "Nyelv"
 
-#: admin.py:650
+#: admin.py:713
 msgid "Roles"
 msgstr "Jogosultságok"
 
-#: admin.py:651
+#: admin.py:714
 msgid "Registered At"
 msgstr "Regisztráció"
 
-#: admin.py:652
+#: admin.py:715
 msgid "Active"
 msgstr "Aktív"
 
@@ -163,17 +181,9 @@ msgstr "Blokk létrehozása"
 msgid "Question %(num)s"
 msgstr "%(num)s. Kérdés"
 
-#: form.py:44 form.py:80 form.py:160 form.py:212
-msgid "Answer"
-msgstr "Válasz"
-
 #: form.py:55
 msgid "Number of Choices"
 msgstr "Válaszlehetőségek száma"
-
-#: form.py:92
-msgid "Answers"
-msgstr "Válaszok"
 
 #: form.py:129 form.py:263
 msgid "Connection"
@@ -229,7 +239,7 @@ msgstr "Meglévő betöltése"
 msgid "Confirm Password"
 msgstr "Jelszó megerősítés"
 
-#: security.py:23 templates/_quiz_card.html:13 templates/navbar.html:53
+#: security.py:23 templates/_quiz_card.html:52 templates/navbar.html:53
 #: templates/security/_menu.html:6 templates/security/register_user.html:3
 msgid "Register"
 msgstr "Regisztáció"
@@ -238,15 +248,19 @@ msgstr "Regisztáció"
 msgid "Remember Me"
 msgstr "Emlékezz rám"
 
-#: security.py:41 templates/_quiz_card.html:10 templates/navbar.html:48
+#: security.py:41 templates/_quiz_card.html:49 templates/navbar.html:48
 msgid "Sign in"
 msgstr "Bejelentkezés"
 
-#: templates/_quiz_card.html:6
+#: templates/_quiz_card.html:42
 msgid "Start"
 msgstr "Indítás"
 
-#: templates/_quiz_card.html:18
+#: templates/_quiz_card.html:45
+msgid "Static View"
+msgstr "Statikus nézet"
+
+#: templates/_quiz_card.html:57
 msgid "Edit"
 msgstr "Szerkesztés"
 

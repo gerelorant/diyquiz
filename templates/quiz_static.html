@@ -1,0 +1,80 @@
+{% extends 'admin/master.html' %}
+
+{% block head_css %}
+    {{ super() }}
+    <link href="{{ url_for('static', filename="css/style.css") }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <h1>{{ quiz.name }}</h1>
+
+    <ul class="nav nav-pills" style="margin-bottom: 1rem;">
+        {% for section in quiz.sections %}
+            <li role="presentation" {% if section.order_number == 1 %}class="active" {% endif %}><a data-toggle="tab" href="#section-{{ section.id }}">{{ section.order_number }}. {{ section.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <div class="tab-content">
+    {% for section in quiz.sections %}
+        <div id="section-{{ section.id }}" class="tab-pane fade {% if section.order_number == 1 %}in active{% endif %}">
+
+
+            <ul class="nav nav-pills" style="margin-bottom: 1rem;">
+                {% for question in section.questions %}
+                    <li role="presentation" {% if question.order_number == 1 %}class="active" {% endif %}><a data-toggle="tab" href="#question-{{ question.id }}">{{ question.order_number }}</a></li>
+                {% endfor %}
+            </ul>
+
+            <div class="tab-content">
+                {% for question in section.questions %}
+                    <div id="question-{{ question.id }}" class="jumbotron question tab-pane fade {% if question.order_number == 1 %}in active{% endif %}">
+                        <h3>{{ question.order_number }}.</h3>
+                        <ul class="nav nav-pills pull-right">
+                            <li role="presentation" class="active"><a data-toggle="tab" href="#question-content-{{ question.id }}">{{ _('Questions') }}</a></li>
+                            <li role="presentation"><a data-toggle="tab" href="#answers-{{ question.id }}">{{ _('Answer') }}</a></li>
+                        </ul>
+                        <div class="tab-content" style="margin-top: 8rem;">
+                            <div id="question-content-{{ question.id }}" class="tab-pane fade in active">
+                                <div class="question-content">
+                                    {{ question.content|safe }}
+                                </div>
+                                {% if question.show_values %}
+                                    <div class="well values text-center">
+                                        {% for value in question.values %}
+                                            <p>{{ value.text }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div id="answers-{{ question.id }}"class="tab-pane fade">
+                                <div class="question-content">
+                                    {{ question.content|safe }}
+                                    <br>
+                                    <div class="answer-content">
+                                        {% if question.answer_content %}
+                                            {{ question.answer_content|safe or '' }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% if question.show_values %}
+                                    <div class="well values text-center">
+                                        {% for value in question.values %}
+                                            <p>{{ value.text }}{% if value.points > 0 %} <span class="glyphicon glyphicon-ok correct-mark"></span>{% endif %}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    <div class="correct-answers">
+                                        {% for value in question.values %}
+                                            {% if value.points > 0 %}<p>{{ value.text }}</p>{% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
