@@ -1,5 +1,39 @@
 <div class="well">
     <h4>{{ quiz.name }}</h4>
+
+    <table class="table" style="max-width: 540px; margin:auto;">
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    {{ _('Username') }}
+                </th>
+                <th>
+                    {{ _('Points') }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in quiz.ranking %}
+                <tr>
+                    <td>
+                        {{ data['rank'] }}
+                    </td>
+                    <td style="width:100%">
+                        {% if current_user.is_authenticated and current_user.id == data['id'] %}
+                            <span class="glyphicon glyphicon-user"></span>
+                        {% endif %}
+                        {{ data['username'] }}
+                    </td>
+                    <td class="text-right">
+                        {% if data['rank'] < 4 %}{{ data['points'] }}p{% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <div class="text-right">
         {% if current_user.is_authenticated %}
             <a class="btn btn-success" href="{{ url_for('admin.quiz', quiz_id=quiz.id) }}">

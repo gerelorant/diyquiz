@@ -341,7 +341,7 @@ class Quiz(db.Model):
         return self.name
 
     def points(self, user: User) -> float:
-        return sum([ans.points for ans in user.answers.join(Section, Quiz).filter(Quiz.id == self.id)])
+        return sum([section.points(user) for section in self.sections if section.closed])
 
     def data(
             self,
@@ -355,8 +355,25 @@ class Quiz(db.Model):
             'end_time': self.end_time.isoformat() if self.end_time else None,
             'sections': [section.as_dict(user, cached_content=cached_content, cached_answers=cached_answers)
                          for section in self.sections],
-            'points': sum([section.points(user) for section in self.sections if section.closed])
+            'points': self.points(user)
         }
+
+    @property
+    def ranking(self):
+        users: list = db.session.query(User).join(Answer).join(Question).join(Section)\
+            .filter(Section.container_id == self.id)\
+            .group_by(User.id)\
+            .all()
+
+        ranking = [{'id': u.id, 'username': u.username, 'points': self.points(u)} for u in users]
+        ranking.sort(key=lambda x: x['points'], reverse=True)
+        rank = 1
+        for i in range(len(ranking)):
+            ranking[i]['rank'] = rank
+            if i + 1 < len(ranking) and ranking[i+1]['points'] != ranking[i]['points']:
+                rank += 1
+
+        return ranking
 
 
 class Section(db.Model, ordered_mixin(Quiz, 'sections')):
