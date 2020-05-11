@@ -148,7 +148,8 @@ class IndexView(AdminIndexView):
         if section is None:
             return abort(404)
 
-        if current_user.is_anonymous or current_user.id != section.user_id:
+        if not (current_user.is_authenticated
+                and (current_user.id == section.user_id or current_user.has_role('admin'))):
             return abort(403)
 
         section.open = not section.open
@@ -162,7 +163,8 @@ class IndexView(AdminIndexView):
         if section is None:
             return abort(404)
 
-        if current_user.is_anonymous or current_user.id != section.user_id:
+        if not (current_user.is_authenticated
+                and (current_user.id == section.user_id or current_user.has_role('admin'))):
             return abort(403)
 
         section.closed = not section.closed
@@ -180,7 +182,8 @@ class IndexView(AdminIndexView):
         if question is None:
             return abort(404)
 
-        if current_user.is_anonymous or current_user.id != question.container.user_id:
+        if not (current_user.is_authenticated
+                and (current_user.id == question.container.user_id or current_user.has_role('admin'))):
             return abort(403)
 
         question.open = not question.open
@@ -194,7 +197,8 @@ class IndexView(AdminIndexView):
         if question is None:
             return abort(404)
 
-        if current_user.is_anonymous or current_user.id != question.container.user_id:
+        if not (current_user.is_authenticated
+                and (current_user.id == question.container.user_id or current_user.has_role('admin'))):
             return abort(403)
 
         question.closed = not question.closed
