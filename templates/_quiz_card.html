@@ -37,12 +37,12 @@
     {% endif %}
 
     <div class="text-right">
+        <a class="btn btn-primary" href="{{ url_for('admin.quiz_static', quiz_id=quiz.id) }}">
+            {{ _('Static View') }}
+        </a>
         {% if current_user.is_authenticated %}
             <a class="btn btn-success" href="{{ url_for('admin.quiz', quiz_id=quiz.id) }}">
                 {{ _('Start') }}
-            </a>
-            <a class="btn btn-primary" href="{{ url_for('admin.quiz_static', quiz_id=quiz.id) }}">
-                {{ _('Static View') }}
             </a>
         {% else %}
             <a class="btn btn-link" href="{{ url_for('security.login') }}">

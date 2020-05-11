@@ -52,9 +52,6 @@ class IndexView(AdminIndexView):
         if quiz is None:
             return abort(404)
 
-        if current_user.is_anonymous:
-            return abort(403)
-
         return self.render('quiz_static.html', quiz=quiz)
 
     @expose('/quiz/<int:quiz_id>/edit')
