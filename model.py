@@ -399,7 +399,7 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
             user: User,
             cached_content: list = None,
             cached_answers: list = None) -> dict:
-        is_host = self.user_id == user.id
+        is_host = (self.user_id == user.id) or user.has_role('admin')
         return {
             'id': self.id,
             'name': self.name,
@@ -490,7 +490,7 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
             'points': self.points(user) if self.container.closed else None,
             'average': self.average if self.closed or self.container.user_id == user.id  else None,
             'correct': [value.text for value in self.values if value.points > 0] if self.container.closed else [],
-            'host': self.container.user_id == user.id,
+            'host': (self.container.user_id == user.id) or user.has_role('admin'),
             'bonus': self.bonus}
 
     def duplicate(self):

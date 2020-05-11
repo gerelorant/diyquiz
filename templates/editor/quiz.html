@@ -11,7 +11,7 @@
             <td style="vertical-align: middle">{{ section.order_number }}</td>
             <td style="vertical-align: middle;width: 100%">{{ section.name }}</td>
             <td style="vertical-align: middle;white-space: nowrap;text-align: right">
-                {% if section.user_id == current_user.id %}
+                {% if (section.user_id == current_user.id) or current_user.has_role('admin') %}
                     <a class="btn btn-sm btn-warning" href="{{ url_for('section.edit_view', id=section.id, url=request.url) }}">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a>
