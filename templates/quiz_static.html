@@ -25,16 +25,17 @@
                 {% endfor %}
             </ul>
 
+            <ul class="nav nav-pills" style="margin-bottom: 1rem;">
+                <li role="presentation" class="active"><a data-toggle="tab" href=".question-content-{{ section.id }}">{{ _('Questions') }}</a></li>
+                <li role="presentation"><a data-toggle="tab" href=".answers-{{ section.id }}">{{ _('Answers') }}</a></li>
+            </ul>
+
             <div class="tab-content">
                 {% for question in section.questions %}
                     <div id="question-{{ question.id }}" class="jumbotron question tab-pane fade {% if question.order_number == 1 %}in active{% endif %}">
                         <h3>{{ question.order_number }}.</h3>
-                        <ul class="nav nav-pills pull-right">
-                            <li role="presentation" class="active"><a data-toggle="tab" href="#question-content-{{ question.id }}">{{ _('Questions') }}</a></li>
-                            <li role="presentation"><a data-toggle="tab" href="#answers-{{ question.id }}">{{ _('Answer') }}</a></li>
-                        </ul>
                         <div class="tab-content" style="margin-top: 8rem;">
-                            <div id="question-content-{{ question.id }}" class="tab-pane fade in active">
+                            <div class="question-content-{{ section.id }} tab-pane fade in active">
                                 <div class="question-content">
                                     {{ question.content|safe }}
                                 </div>
@@ -46,7 +47,7 @@
                                     </div>
                                 {% endif %}
                             </div>
-                            <div id="answers-{{ question.id }}"class="tab-pane fade">
+                            <div class="answers-{{ section.id }} tab-pane fade">
                                 <div class="question-content">
                                     {{ question.content|safe }}
                                     <br>
