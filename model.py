@@ -435,8 +435,8 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
 
 
 class Question(db.Model, ordered_mixin(Section, 'questions')):
-    content = db.deferred(db.Column(db.Text(12800)))
-    answer_content = db.deferred(db.Column(db.Text(12800)))
+    content = db.deferred(db.Column(db.Text(10485760)))
+    answer_content = db.deferred(db.Column(db.Text(10485760)))
     show_values = db.Column(db.Boolean, default=False)
     max_answers = db.Column(db.Integer, default=1)
     base_points = db.Column(db.Integer, default=0)
