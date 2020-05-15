@@ -384,7 +384,7 @@ class QuizView(ModelView):
         'password': _l('Password')
     }
 
-    form_excluded_columns = ['sections']
+    form_excluded_columns = ['sections', 'last_updated']
     edit_template = 'editor/quiz.html'
 
     def get_query(self):
