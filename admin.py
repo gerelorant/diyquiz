@@ -23,17 +23,18 @@ class IndexView(AdminIndexView):
     def index(self, page: int = 1):
         per_page = current_app.config.get('PER_PAGE', 20)
         hosted = [q.id for q in current_user.quizzes] if current_user.is_authenticated else []
+        now = dt.datetime.utcnow()
 
         quizzes = md.Quiz.query\
             .filter(sa.or_(
                 sa.and_(
                     md.Quiz.start_time.isnot(None),
-                    md.Quiz.start_time < dt.datetime.utcnow()),
+                    md.Quiz.start_time < now),
                 md.Quiz.id.in_(hosted)))\
             .order_by(md.Quiz.start_time.desc())\
             .paginate(page, per_page, error_out=False)
 
-        return self.render('index.html', quizzes=quizzes)
+        return self.render('index.html', quizzes=quizzes, now=now)
 
     @expose('/quiz/<int:quiz_id>/')
     def quiz(self, quiz_id: int):
