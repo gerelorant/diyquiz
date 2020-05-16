@@ -160,33 +160,33 @@ function update(repeat = false) {
         }
     }).always(function() {
         if (repeat) {
-            setTimeout(function() {update(true)}, 500);
+            setTimeout(function() {update(true)}, 2000);
         }
     });
 }
 
 function like(id) {
-    $.post(`/api/questions/${id}/like`);
+    $.post(`/api/questions/${id}/like`).always(function() {update()});
     $(`#question-${id} button`).attr('disabled', true);
 }
 
 function openQuestion(id) {
-    $.post(`/api/questions/${id}/open`);
+    $.post(`/api/questions/${id}/open`).always(function() {update()});
     $(`#question-${id} button`).attr('disabled', true);
 }
 
 function closeQuestion(id) {
-    $.post(`/api/questions/${id}/close`);
+    $.post(`/api/questions/${id}/close`).always(function() {update()});
     $(`#question-${id} button`).attr('disabled', true);
 }
 
 function openSection(id) {
-    $.post(`/api/sections/${id}/open`);
+    $.post(`/api/sections/${id}/open`).always(function() {update()});
     $(`#section-${id} button`).attr('disabled', true);
 }
 
 function closeSection(id) {
-    $.post(`/api/sections/${id}/close`);
+    $.post(`/api/sections/${id}/close`).always(function() {update()});
     $(`#section-${id} button`).attr('disabled', true);
 }
 
@@ -198,6 +198,7 @@ function setAnswer(id) {
         $(`.question-radio[data-id=${id}]:checked`).each(function (index, item) {
             $.post(`/api/questions/${id}/answer`, {value: $(item).val()})
         });
+        update();
     })
 }
 
