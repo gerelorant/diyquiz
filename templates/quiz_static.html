@@ -12,13 +12,13 @@
 
         <ul class="nav nav-pills" style="margin-bottom: 1rem;">
             {% for section in quiz.sections %}
-                <li role="presentation" {% if section.order_number == 1 %}class="active" {% endif %}><a data-toggle="tab" href="#section-{{ section.id }}">{{ section.order_number }}. {{ section.name }}</a></li>
+                <li role="presentation"><a data-toggle="tab" href="#section-{{ section.id }}">{{ section.order_number }}. {{ section.name }}</a></li>
             {% endfor %}
         </ul>
 
         <div class="tab-content">
         {% for section in quiz.sections %}
-            <div id="section-{{ section.id }}" class="tab-pane fade {% if section.order_number == 1 %}in active{% endif %}">
+            <div id="section-{{ section.id }}" class="tab-pane fade">
 
 
                 <ul class="nav nav-pills" style="margin-bottom: 1rem;">
