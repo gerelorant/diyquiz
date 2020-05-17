@@ -351,6 +351,7 @@ class Quiz(db.Model):
             include_content: bool = True
     ) -> dict:
         current = self.current_section
+        print(current.order_number)
         return {
             'id': self.id,
             'name': self.name,
@@ -367,7 +368,8 @@ class Quiz(db.Model):
 
     @property
     def current_section(self):
-        question = db.session.query(Question).join(Section)\
+        question = db.session.query(Question).join(Section).join(Quiz)\
+            .filter(Quiz.id == self.id)\
             .filter(sa.or_(
                 sa.and_(Question.open == False, Section.closed == True),
                 Section.closed == False))\
