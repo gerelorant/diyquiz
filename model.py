@@ -455,6 +455,7 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
 
 
 class Question(db.Model, ordered_mixin(Section, 'questions')):
+    text = db.Column(db.Text())
     content = db.deferred(db.Column(db.Text(10485760)))
     answer_content = db.deferred(db.Column(db.Text(10485760)))
     show_values = db.Column(db.Boolean, default=False)
@@ -514,6 +515,7 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
         return {
             'id': self.id,
             'order_number': self.order_number,
+            'text': self.text,
             'content': self.content \
                 if include_content and self.id not in cached_content and self.open \
                 else None,

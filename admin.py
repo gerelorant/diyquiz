@@ -513,6 +513,7 @@ class QuestionView(ModelView):
     columns = {
         'container': _l('Section'),
         'order_number': _l('Order Number'),
+        'text': _l('Text'),
         'content': _l('Content'),
         'answer_content': _l('Answer Content'),
         'show_values': _l('Show Values'),

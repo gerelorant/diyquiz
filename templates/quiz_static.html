@@ -39,6 +39,7 @@
                             <div class="tab-content" style="margin-top: 8rem;">
                                 <div class="question-content-{{ section.id }} tab-pane fade in active">
                                     <div class="question-content">
+                                        {{ question.text|safe }}<br>
                                         {{ question.content|safe }}
                                     </div>
                                     {% if question.show_values %}

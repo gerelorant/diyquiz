@@ -35,7 +35,7 @@ class GenericForm(FlaskForm):
 
         for i in range(self.number_of_questions.data):
             question = md.Question(
-                content=_('Question %(num)s', num=i+1),
+                text=_('Question %(num)s', num=i+1),
                 order_number=i+1,
                 container=section
             )
@@ -69,7 +69,7 @@ class MultipleChoiceForm(GenericForm):
 
         for i in range(self.number_of_questions.data):
             question = md.Question(
-                content=_('Question %(num)s', num=i+1),
+                text=_('Question %(num)s', num=i+1),
                 order_number=i+1,
                 show_values=True,
                 container=section
@@ -107,7 +107,7 @@ class PairingForm(GenericForm):
 
         for i in range(len(answers)):
             question = md.Question(
-                content=_('Question %(num)s', num=i+1),
+                text=_('Question %(num)s', num=i+1),
                 order_number=i+1,
                 show_values=True,
                 container=section
@@ -149,7 +149,7 @@ class ConnectionForm(GenericForm):
 
         for i in range(self.number_of_questions.data-1):
             question = md.Question(
-                content=_('Question %(num)s', num=i+1),
+                text=_('Question %(num)s', num=i+1),
                 order_number=order_number,
                 show_values=False,
                 container=section
@@ -164,7 +164,7 @@ class ConnectionForm(GenericForm):
             ))
             if i < self.opportunities.data:
                 question = md.Question(
-                    content=_('What is the connection? (+%(num)s/-1)', num=self.opportunities.data - i),
+                    text=_('What is the connection? (+%(num)s/-1)', num=self.opportunities.data - i),
                     order_number=order_number,
                     show_values=False,
                     bonus=True,
@@ -182,7 +182,7 @@ class ConnectionForm(GenericForm):
                     ))
 
         question = md.Question(
-            content=_('What is the connection?'),
+            text=_('What is the connection?'),
             order_number=order_number,
             show_values=False,
             bonus=True,
@@ -225,7 +225,7 @@ class WhoAmIForm(GenericForm):
 
         for i in range(self.number_of_questions.data):
             question = md.Question(
-                content=_('Statement %(num)s', num=i+1),
+                text=_('Statement %(num)s', num=i+1),
                 order_number=i+1,
                 show_values=False,
                 bonus=True,
