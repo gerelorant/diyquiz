@@ -347,13 +347,16 @@ class Quiz(db.Model):
             self,
             user: User,
             cached_content: list = None,
-            cached_answers: list = None) -> dict:
+            cached_answers: list = None,
+            include_content: bool = True
+    ) -> dict:
         return {
             'id': self.id,
             'name': self.name,
             'start_time': self.start_time.isoformat() if self.start_time else None,
             'end_time': self.end_time.isoformat() if self.end_time else None,
-            'sections': [section.as_dict(user, cached_content=cached_content, cached_answers=cached_answers)
+            'sections': [section.as_dict(user, cached_content=cached_content,
+                                         cached_answers=cached_answers, include_content=include_content)
                          for section in self.sections],
             'points': self.points(user)
         }
@@ -415,7 +418,8 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
             self,
             user: User,
             cached_content: list = None,
-            cached_answers: list = None) -> dict:
+            cached_answers: list = None,
+            include_content: bool = True) -> dict:
         is_host = (self.user_id == user.id) or user.has_role('admin')
         return {
             'id': self.id,
@@ -424,7 +428,8 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
             'user': self.user.username,
             'open': True,
             'closed': self.closed,
-            'questions': [question.as_dict(user, cached_content=cached_content, cached_answers=cached_answers)
+            'questions': [question.as_dict(user, cached_content=cached_content,
+                                           cached_answers=cached_answers, include_content=include_content)
                           for question in self.questions if is_host or question.open],
             'points': self.points(user) \
                 if self.closed and self.questions.filter_by(open=False).first() is None \
@@ -489,12 +494,17 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
             self,
             user: User,
             cached_content: list = None,
-            cached_answers: list = None) -> dict:
+            cached_answers: list = None,
+            include_content: bool = True) -> dict:
         return {
             'id': self.id,
             'order_number': self.order_number,
-            'content': self.content if self.id not in cached_content and self.open else None,
-            'answer_content': self.answer_content if self.container.closed and self.id not in cached_answers else None,
+            'content': self.content \
+                if include_content and self.id not in cached_content and self.open \
+                else None,
+            'answer_content': self.answer_content \
+                if include_content and self.container.closed and self.id not in cached_answers \
+                else None,
             'max_answers': self.max_answers,
             'base_points': self.base_points,
             'open': self.open,

@@ -1,5 +1,6 @@
 const CONTENT_CACHE = {};
 const ANSWER_CONTENT_CACHE = {};
+var autoRefresh = true;
 
 function renderQuestion(data) {
     var inputs = "";
@@ -139,6 +140,9 @@ function renderQuiz(data) {
     return `
     <h1 class="quiz-title">${data.name}</h1>
     ${sections}
+    <button id="auto-refresh" class="btn btn-primary auto-refresh" onclick="setAutoRefresh(!autoRefresh)">
+        <span class="glyphicon glyphicon-pause"></span>
+    </button>
     <div class="total-score">
         ${points}p
     </div>
@@ -152,17 +156,29 @@ function update(repeat = false) {
     }
     $.getJSON(`/api/quiz/${QUIZ_ID}/`, data, function(data) {
         if (data) {
-            $('#quiz').html(renderQuiz(data));
-            /*$(".question-text, .question-radio").on('change', function(){
-                setAnswer($(this).attr('data-id'));
-            });*/
-            $('form').on('submit', (evt) => evt.preventDefault());
+            if (!repeat || autoRefresh) {
+                $('#quiz').html(renderQuiz(data));
+                /*$(".question-text, .question-radio").on('change', function(){
+                    setAnswer($(this).attr('data-id'));
+                });*/
+                $('form').on('submit', (evt) => evt.preventDefault());
+            }
         }
     }).always(function() {
-        if (repeat) {
+        if (repeat && autoRefresh) {
             setTimeout(function() {update(true)}, 2000);
         }
     });
+}
+
+function setAutoRefresh(refreshing) {
+    autoRefresh = refreshing;
+    if (refreshing) {
+        $('#auto-refresh span').addClass('glyphicon-pause').removeClass('glyphicon-play');
+        update(true);
+    } else {
+        $('#auto-refresh span').removeClass('glyphicon-pause').addClass('glyphicon-play');
+    }
 }
 
 function like(id) {

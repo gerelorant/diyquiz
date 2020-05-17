@@ -99,11 +99,19 @@ class IndexView(AdminIndexView):
             return self.render('editor/template.html', form=form)
 
 
+    def load_quiz_data(self, quiz, include_content: bool = True):
+        cached_content = [int(x) if x else 0 for x in request.args.get('cached_content', '0').split(',')]
+        cached_answers = [int(x) if x else 0 for x in request.args.get('cached_answers', '0').split(',')]
+
+        self.api_updates[(current_user.id, quiz.id)] = dt.datetime.utcnow()
+        resp = quiz.data(current_user, cached_content=cached_content,
+                         cached_answers=cached_answers, include_content=include_content)
+        return resp
+
+
     @expose('/api/quiz/<int:quiz_id>/', methods=['GET', 'POST'])
     def quiz_data(self, quiz_id: int):
         force = request.args.get('force', False)
-        cached_content = [int(x) if x else 0 for x in request.args.get('cached_content', '0').split(',')]
-        cached_answers = [int(x) if x else 0 for x in request.args.get('cached_answers', '0').split(',')]
 
         quiz = md.Quiz.query.get(quiz_id)
         if quiz is None:
@@ -113,8 +121,7 @@ class IndexView(AdminIndexView):
             return abort(403)
 
         if force or self.api_updates.get((current_user.id, quiz_id), dt.datetime(1970, 1, 1)) < quiz.last_updated:
-            self.api_updates[(current_user.id, quiz_id)] = dt.datetime.utcnow()
-            resp = quiz.data(current_user, cached_content=cached_content, cached_answers=cached_answers)
+            resp = self.load_quiz_data(quiz)
             return jsonify(resp)
 
         return jsonify(None)
@@ -147,7 +154,6 @@ class IndexView(AdminIndexView):
             question.likes.remove(current_user)
         else:
             question.likes.append(current_user)
-        question.container.container.last_updated = dt.datetime.utcnow()
         md.db.session.commit()
         return jsonify(None)
 
@@ -227,13 +233,19 @@ class IndexView(AdminIndexView):
         value = request.json.get('value', None) if request.json else request.values.get('value', None)
 
         if value:
-            md.db.session.add(md.Answer(
-                value=value,
-                user_id=current_user.id,
-                question_id=question.id))
-            md.db.session.commit()
+            number_of_answers = md.db.session.query(sa.func.sum(md.Answer.id))\
+                .filter(md.Answer.user_id == current_user.id)\
+                .filter(md.Answer.question == question)\
+                .first()[0]
+            if (number_of_answers or 0) < question.max_answers:
+                md.db.session.add(md.Answer(
+                    value=value,
+                    user_id=current_user.id,
+                    question_id=question.id))
+                md.db.session.commit()
 
-        return jsonify(None)
+        resp = self.load_quiz_data(question.container.container, include_content=False)
+        return jsonify(resp)
 
     @expose('/api/questions/<int:question_id>/clear', methods=['POST'])
     def clear_answers(self, question_id: int):
