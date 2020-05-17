@@ -56,7 +56,7 @@ function renderQuestion(data) {
     <div id="question-${data.id}" class="jumbotron question">
         <h3>${data.order_number}. ${data.bonnus ? `<span class="glyphicon glyphicon-asterisk"></span> ` : ''}${data.points != null ? `<span class="section-points">${data.points}p</span>` : ''}</h3>
         <div class="question-content ${data.closed ? 'disabled' : 'enabled'}">
-            ${data.text}
+            ${data.text || ''}
             <br>
             ${CONTENT_CACHE[data.id] || ''}
             <br>
