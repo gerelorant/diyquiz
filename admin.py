@@ -523,7 +523,8 @@ class QuestionView(ModelView):
         'open': _l('Visible'),
         'closed': _l('Closed')
     }
-
+    form_columns = ['order_number', 'text', 'content', 'answer_content',
+                   'show_values', 'max_answers', 'base_points', 'bonus']
     form_excluded_columns = ['container', 'likes', 'values', 'attachments', 'answers', 'open', 'closed']
     column_exclude_list = ['content', 'answer_content']
     column_editable_list = ['open', 'closed']
