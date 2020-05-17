@@ -359,7 +359,8 @@ class Quiz(db.Model):
             'sections': [section.as_dict(user,
                                          cached_content=cached_content,
                                          cached_answers=cached_answers,
-                                         include_content=include_content and section == current)
+                                         include_content=include_content
+                                                         and (section is None or section.id == current.id))
                          for section in self.sections],
             'points': self.points(user)
         }
