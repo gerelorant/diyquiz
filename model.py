@@ -350,16 +350,31 @@ class Quiz(db.Model):
             cached_answers: list = None,
             include_content: bool = True
     ) -> dict:
+        current = self.current_section
         return {
             'id': self.id,
             'name': self.name,
             'start_time': self.start_time.isoformat() if self.start_time else None,
             'end_time': self.end_time.isoformat() if self.end_time else None,
-            'sections': [section.as_dict(user, cached_content=cached_content,
-                                         cached_answers=cached_answers, include_content=include_content)
+            'sections': [section.as_dict(user,
+                                         cached_content=cached_content,
+                                         cached_answers=cached_answers,
+                                         include_content=include_content and section == current)
                          for section in self.sections],
             'points': self.points(user)
         }
+
+    @property
+    def current_section(self):
+        question = db.session.query(Question).join(Section)\
+            .filter(sa.or_(
+                sa.and_(Question.open == False, Section.closed == True),
+                Section.closed == False))\
+            .order_by(Section.order_number, Question.order_number)\
+            .first()
+
+        if question:
+            return question.container
 
     @property
     def ranking(self):
