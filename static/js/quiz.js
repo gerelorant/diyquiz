@@ -142,9 +142,21 @@ function renderQuiz(data) {
         points = item.points ? points + item.points : points;
     });
 
+    var rows = '';
+    data.rankings.forEach(function (item) {
+        rows += `<tr>
+            <td>${item.rank}</td>
+            <td style="width: 100%">${item.id === data.user_id ? '<span class="glyphicon glyphicon-user"></span>' : ''} ${item.username}</td>
+            <td class="text-right">${item.rank < 4 ? item.rank : ''}</td>
+        </tr>`
+    })
+
     return `
     <h1 class="quiz-title">${data.name}</h1>
     ${sections}
+    <div id="rankings" class="jumbotron">
+        <table class="table">${rows}</table>
+    </div>
     <div class="total-score">
         ${points}p
     </div>

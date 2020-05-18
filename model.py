@@ -363,7 +363,9 @@ class Quiz(db.Model):
                                          include_content=include_content
                                                          and (section == current))
                          for section in self.sections],
-            'points': self.points(user)
+            'points': self.points(user),
+            'user_id': user.id,
+            'rankings': self.ranking
         }
 
     @property
@@ -386,10 +388,14 @@ class Quiz(db.Model):
         ranking = [{'id': u.id, 'username': u.username, 'points': self.points(u)} for u in users]
         ranking.sort(key=lambda x: x['points'], reverse=True)
         rank = 1
+        d = 1
         for i in range(len(ranking)):
             ranking[i]['rank'] = rank
             if i + 1 < len(ranking) and ranking[i+1]['points'] != ranking[i]['points']:
-                rank += 1
+                rank += d
+                d = 1
+            else:
+                d += 1
 
         return ranking
 
