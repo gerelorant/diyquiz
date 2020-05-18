@@ -70,8 +70,8 @@ function renderQuestion(data) {
                 </button>
                 <button type="button" class="btn btn-${data.closed ? 'danger' : 'default'}" onclick="closeQuestion(${data.id})">
                     <span class="glyphicon glyphicon-lock"></span>
-                </button>` : `
-                <button type="button" class="btn btn-success ${sectionClosed || data.closed ? 'disabled' : ''}" ${sectionClosed || data.closed ? 'disabled' : ''} onclick="setAnswer(${data.id})">
+                </button>` : 
+                `<button type="button" class="btn btn-success ${sectionClosed || data.closed ? 'disabled' : ''}" ${sectionClosed || data.closed ? 'disabled' : ''} onclick="setAnswer(${data.id})">
                     <span class="glyphicon glyphicon-save"></span>   
                 </button>`}
                 ${data.average != null ? `
@@ -86,7 +86,10 @@ function renderQuestion(data) {
                 </button>
                 <button type="button" class="btn ${data.liked ? 'btn-primary' : 'btn-default'}" onclick="like(${data.id})">
                     <span class="glyphicon glyphicon-thumbs-up"></span> ${data.likes}
-            </button>
+                </button>
+                <button type="button" class="btn btn-default" onclick="refreshQuestion(${data.id})">
+                    <span class="glyphicon glyphicon-refresh"></span>   
+                </button>
             </div>  
         </div>
         <div class="answer-inputs">
@@ -217,6 +220,13 @@ function setAnswer(id) {
             $.post(`/api/questions/${id}/answer`, {value: $(item).val()})
         });
         update();
+    })
+}
+
+function refreshQuestion(id) {
+    $.get(`/api/questions/${id}`).done(function(data) {
+        $(`#question-${data.id}`).replaceWith(renderQuestion(data));
+        $('form').on('submit', (evt) => evt.preventDefault());
     })
 }
 

@@ -262,6 +262,17 @@ class IndexView(AdminIndexView):
         md.db.session.commit()
         return jsonify(None)
 
+    @expose('/api/questions/<int:question_id>', methods=['GET'])
+    def clear_answers(self, question_id: int):
+        question: md.Question = md.Question.query.get(question_id)
+        if question is None:
+            return abort(404)
+
+        if current_user.is_anonymous:
+            return abort(403)
+
+        return jsonify(question.as_dict(current_user))
+
 
 admin = Admin(
     name='DIY Quiz',

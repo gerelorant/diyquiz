@@ -351,7 +351,6 @@ class Quiz(db.Model):
             include_content: bool = True
     ) -> dict:
         current = self.current_section
-        print(current.order_number)
         return {
             'id': self.id,
             'name': self.name,
@@ -361,7 +360,7 @@ class Quiz(db.Model):
                                          cached_content=cached_content,
                                          cached_answers=cached_answers,
                                          include_content=include_content
-                                                         and (section is None or section.id == current.id))
+                                                         and (section == current))
                          for section in self.sections],
             'points': self.points(user)
         }
@@ -515,6 +514,12 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
             cached_content: list = None,
             cached_answers: list = None,
             include_content: bool = True) -> dict:
+
+        if cached_content is None:
+            cached_content = []
+        if cached_answers is None:
+            cached_answers = []
+
         return {
             'id': self.id,
             'order_number': self.order_number,
