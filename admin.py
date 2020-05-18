@@ -232,7 +232,7 @@ class IndexView(AdminIndexView):
 
         value = request.json.get('value', None) if request.json else request.values.get('value', None)
 
-        if value:
+        if value and question.allowed(current_user):
             number_of_answers = md.db.session.query(sa.func.sum(md.Answer.id))\
                 .filter(md.Answer.user_id == current_user.id)\
                 .filter(md.Answer.question == question)\
@@ -256,14 +256,15 @@ class IndexView(AdminIndexView):
         if current_user.is_anonymous:
             return abort(403)
 
-        for answer in question.answers.filter_by(user_id=current_user.id):
-            md.db.session.delete(answer)
+        if question.allowed(current_user):
+            for answer in question.answers.filter_by(user_id=current_user.id):
+                md.db.session.delete(answer)
 
-        md.db.session.commit()
+            md.db.session.commit()
         return jsonify(None)
 
     @expose('/api/questions/<int:question_id>', methods=['GET'])
-    def clear_answers(self, question_id: int):
+    def question_data(self, question_id: int):
         question: md.Question = md.Question.query.get(question_id)
         if question is None:
             return abort(404)
