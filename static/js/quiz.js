@@ -144,7 +144,7 @@ function renderQuiz(data) {
 
     var rows = '';
     data.rankings.forEach(function (item) {
-        rows += `<tr${item.id === data.user_id ? ' class="table-success"' : ''}>
+        rows += `<tr${item.id === data.user_id ? ' class="bg-primary"' : ''}>
             <td>${item.rank}</td>
             <td style="width: 100%">${item.id === data.user_id ? '<span class="glyphicon glyphicon-user"></span>' : ''} ${item.username}</td>
             <td class="text-right">${item.rank < 4 ? item.points : ''}</td>
