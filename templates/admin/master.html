@@ -45,7 +45,27 @@
                         ['para', ['ul', 'ol', 'paragraph']],
                         ['insert', ['table', 'link', 'picture', 'video', 'audio']],
                         ['view', ['fullscreen', 'codeview', 'help']],
-                    ]
+                    ],
+                    popover: {
+                      image: [
+                        ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+                        ['remove', ['removeMedia']]
+                      ],
+                      link: [
+                        ['link', ['linkDialogShow', 'unlink']]
+                      ],
+                      table: [
+                        ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+                        ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+                      ],
+                      air: [
+                        ['color', ['color']],
+                        ['font', ['bold', 'underline', 'clear']],
+                        ['para', ['ul', 'paragraph']],
+                        ['table', ['table']],
+                        ['insert', ['link', 'picture', 'audio', 'video']]
+                      ]
+                    }
                 });
             $('input[type=checkbox]').removeClass('form-control').addClass('checkbox');
             }
