@@ -155,7 +155,7 @@ class IndexView(AdminIndexView):
         else:
             question.likes.append(current_user)
         md.db.session.commit()
-        return jsonify(None)
+        return jsonify(question.as_dict(current_user))
 
     @expose('/api/sections/<int:section_id>/open', methods=['POST'])
     def open_section(self, section_id: int):
@@ -244,8 +244,7 @@ class IndexView(AdminIndexView):
                     question_id=question.id))
                 md.db.session.commit()
 
-        resp = self.load_quiz_data(question.container.container, include_content=False)
-        return jsonify(resp)
+        return jsonify(question.as_dict(current_user))
 
     @expose('/api/questions/<int:question_id>/clear', methods=['POST'])
     def clear_answers(self, question_id: int):

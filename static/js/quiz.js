@@ -184,7 +184,10 @@ function setAutoRefresh(refreshing) {
 }
 
 function like(id) {
-    $.post(`/api/questions/${id}/like`).always(function() {update()});
+    $.post(`/api/questions/${id}/like`).done(function(data) {
+        $(`#question-${data.id}`).replaceWith(renderQuestion(data));
+        $('form').on('submit', (evt) => evt.preventDefault());
+    });
     $(`#question-${id} button`).attr('disabled', true);
 }
 
@@ -211,10 +214,16 @@ function closeSection(id) {
 function setAnswer(id) {
     $.post(`/api/questions/${id}/clear`).always(function() {
         $(`.question-text[data-id=${id}]`).each(function (index, item) {
-            $.post(`/api/questions/${id}/answer`, {value: $(item).val()})
+            $.post(`/api/questions/${id}/answer`, {value: $(item).val()}).done(function(data) {
+                $(`#question-${data.id}`).replaceWith(renderQuestion(data));
+                $('form').on('submit', (evt) => evt.preventDefault());
+            })
         });
         $(`.question-radio[data-id=${id}]:checked`).each(function (index, item) {
-            $.post(`/api/questions/${id}/answer`, {value: $(item).val()})
+            $.post(`/api/questions/${id}/answer`, {value: $(item).val()}).done(function(data) {
+                $(`#question-${data.id}`).replaceWith(renderQuestion(data));
+                $('form').on('submit', (evt) => evt.preventDefault());
+            })
         });
         update();
     })
