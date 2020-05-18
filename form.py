@@ -22,6 +22,11 @@ class GenericForm(FlaskForm):
         validators=[wtf.validators.DataRequired()],
         default=10
     )
+    question_text = wtf.TextAreaField(
+        _l('Default Question Text'),
+        validators=[wtf.validators.Optional()],
+        default=None
+    )
     submit = wtf.SubmitField(_l('Create Section'))
 
     def create(self, quiz: md.Quiz):
@@ -35,7 +40,7 @@ class GenericForm(FlaskForm):
 
         for i in range(self.number_of_questions.data):
             question = md.Question(
-                text=_('Question %(num)s', num=i+1),
+                text=self.question_text or _('Question %(num)s', num=i+1),
                 order_number=i+1,
                 container=section
             )
@@ -69,7 +74,7 @@ class MultipleChoiceForm(GenericForm):
 
         for i in range(self.number_of_questions.data):
             question = md.Question(
-                text=_('Question %(num)s', num=i+1),
+                text=self.question_text or _('Question %(num)s', num=i+1),
                 order_number=i+1,
                 show_values=True,
                 container=section
@@ -107,7 +112,7 @@ class PairingForm(GenericForm):
 
         for i in range(len(answers)):
             question = md.Question(
-                text=_('Question %(num)s', num=i+1),
+                text=self.question_text or _('Question %(num)s', num=i+1),
                 order_number=i+1,
                 show_values=True,
                 container=section
@@ -125,6 +130,7 @@ class PairingForm(GenericForm):
 
 
 class ConnectionForm(GenericForm):
+    question_text = None
     connection = wtf.StringField(
         _l('Connection'),
         validators=[wtf.validators.DataRequired()]
@@ -203,6 +209,7 @@ class ConnectionForm(GenericForm):
 
 
 class WhoAmIForm(GenericForm):
+    question_text = None
     number_of_questions = wtf.IntegerField(
         _l('Number of Questions'),
         validators=[wtf.validators.DataRequired()],
