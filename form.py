@@ -40,7 +40,7 @@ class GenericForm(FlaskForm):
 
         for i in range(self.number_of_questions.data):
             question = md.Question(
-                text=self.question_text or _('Question %(num)s', num=i+1),
+                text=self.question_text.data or _('Question %(num)s', num=i+1),
                 order_number=i+1,
                 container=section
             )
@@ -74,7 +74,7 @@ class MultipleChoiceForm(GenericForm):
 
         for i in range(self.number_of_questions.data):
             question = md.Question(
-                text=self.question_text or _('Question %(num)s', num=i+1),
+                text=self.question_text.data or _('Question %(num)s', num=i+1),
                 order_number=i+1,
                 show_values=True,
                 container=section
@@ -112,7 +112,7 @@ class PairingForm(GenericForm):
 
         for i in range(len(answers)):
             question = md.Question(
-                text=self.question_text or _('Question %(num)s', num=i+1),
+                text=self.question_text.data or _('Question %(num)s', num=i+1),
                 order_number=i+1,
                 show_values=True,
                 container=section

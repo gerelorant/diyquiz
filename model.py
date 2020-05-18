@@ -350,7 +350,7 @@ class Quiz(db.Model):
             cached_answers: list = None,
             include_content: bool = True
     ) -> dict:
-        current = self.current_section
+        current = self.current_question.container
         return {
             'id': self.id,
             'name': self.name,
@@ -366,17 +366,14 @@ class Quiz(db.Model):
         }
 
     @property
-    def current_section(self):
-        question = db.session.query(Question).join(Section).join(Quiz)\
-            .filter(Quiz.id == self.id)\
+    def current_question(self):
+        return db.session.query(Question).join(Section)\
+            .filter(Section.container_id == self.id)\
             .filter(sa.or_(
-                sa.and_(Question.open == False, Section.closed == True),
-                Section.closed == False))\
+                sa.and_(Question.open == True, Section.cloed == False),
+                sa.and_(Section.closed == True, Question.open == False)))\
             .order_by(Section.order_number, Question.order_number)\
             .first()
-
-        if question:
-            return question.container
 
     @property
     def ranking(self):
