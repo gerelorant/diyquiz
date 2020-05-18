@@ -72,7 +72,7 @@ function renderQuestion(data) {
                     <span class="glyphicon glyphicon-lock"></span>
                 </button>` : 
                 `<button type="button" class="btn btn-success ${sectionClosed || data.closed ? 'disabled' : ''}" ${sectionClosed || data.closed ? 'disabled' : ''} onclick="setAnswer(${data.id})">
-                    <span class="glyphicon glyphicon-save"></span>   
+                    <span class="glyphicon glyphicon-save"></span> ${data.answers ? data.answers.join(', ') : ''}  
                 </button>`}
                 ${data.average != null ? `
                 <button type="button" class="btn btn-default disabled">
