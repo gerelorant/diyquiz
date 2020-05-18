@@ -145,9 +145,6 @@ function renderQuiz(data) {
     return `
     <h1 class="quiz-title">${data.name}</h1>
     ${sections}
-    <button id="auto-refresh" class="btn btn-primary auto-refresh" onclick="setAutoRefresh(!autoRefresh)">
-        <span class="glyphicon glyphicon-pause"></span>
-    </button>
     <div class="total-score">
         ${points}p
     </div>
