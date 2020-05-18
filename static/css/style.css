@@ -1,5 +1,19 @@
+body {
+    background-size: cover;
+    background-position:center;
+    background-image:url(https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/6151536/3005/2000/m1/fpnw/wm0/quiz-8-.jpg?1553762091&s=7ad5aa24b92a93d53c2ffac395a02812);
+    background-attachment: fixed;
+    padding-top: 0;
+}
+
 h1, h2, h4 {
     text-align: center;
+}
+
+.container{
+    background-color: rgba(255, 255, 255, 0.95);
+    margin-top: 0;
+    padding-top: 1rem;
 }
 
 .question {
