@@ -144,10 +144,10 @@ function renderQuiz(data) {
 
     var rows = '';
     data.rankings.forEach(function (item) {
-        rows += `<tr>
+        rows += `<tr${item.id === data.user_id ? ' class="table-success"' : ''}>
             <td>${item.rank}</td>
             <td style="width: 100%">${item.id === data.user_id ? '<span class="glyphicon glyphicon-user"></span>' : ''} ${item.username}</td>
-            <td class="text-right">${item.rank < 4 ? item.rank : ''}</td>
+            <td class="text-right">${item.rank < 4 ? item.points : ''}</td>
         </tr>`
     })
 
