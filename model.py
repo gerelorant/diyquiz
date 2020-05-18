@@ -370,7 +370,7 @@ class Quiz(db.Model):
         return db.session.query(Question).join(Section)\
             .filter(Section.container_id == self.id)\
             .filter(sa.or_(
-                sa.and_(Question.open == True, Section.cloed == False),
+                sa.and_(Question.open == True, Section.closed == False),
                 sa.and_(Section.closed == True, Question.open == False)))\
             .order_by(Section.order_number, Question.order_number)\
             .first()
