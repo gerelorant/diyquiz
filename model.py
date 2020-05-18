@@ -350,7 +350,8 @@ class Quiz(db.Model):
             cached_answers: list = None,
             include_content: bool = True
     ) -> dict:
-        current = self.current_question.container
+        current_question = self.current_question
+        current = current_question.container if current_question else None
         return {
             'id': self.id,
             'name': self.name,
