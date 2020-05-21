@@ -433,7 +433,9 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
             if answer.user_id != answer.question.container.user_id:
                 users.add(answer.user)
 
-        return sum([self.points(u) for u in users]) / (len(users) or 1)
+        total = sum([self.points(u) for u in users])
+
+        return (total / (len(users) or 1)) // 0.01
 
     def as_dict(
             self,
@@ -493,7 +495,9 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
             if answer.user_id != answer.question.container.user_id:
                 users.add(answer.user)
 
-        return sum([self.points(u) for u in users]) / (len(users) or 1)
+        total = sum([self.points(u) for u in users])
+
+        return (total / (len(users) or 1)) // 0.01
 
     def allowed(self, user: User) -> bool:
         if self.closed:

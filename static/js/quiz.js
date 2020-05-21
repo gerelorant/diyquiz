@@ -52,6 +52,11 @@ function renderQuestion(data) {
         correctAnswers += `<p>${item}</p>`
     });
 
+    var answersStr = Object.keys(data.answers).join(', ');
+    if (answersStr.length > 20) {
+        answersStr = answersStr.substring(0, 17) + '...'
+    }
+
     return `
     <div id="question-${data.id}" class="jumbotron question">
         <h3>${data.order_number}. ${data.bonnus ? `<span class="glyphicon glyphicon-asterisk"></span> ` : ''}${data.points != null ? `<span class="section-points">${data.points}p</span>` : ''}</h3>
@@ -72,7 +77,7 @@ function renderQuestion(data) {
                     <span class="glyphicon glyphicon-lock"></span>
                 </button>` : 
                 `<button type="button" class="btn btn-success ${sectionClosed || data.closed ? 'disabled' : ''}" ${sectionClosed || data.closed ? 'disabled' : ''} onclick="setAnswer(${data.id})">
-                    <span class="glyphicon glyphicon-save"></span> ${data.answers ? Object.keys(data.answers).join(', ') : ''}  
+                    <span class="glyphicon glyphicon-save"></span> ${data.answers ? answersStr : ''}  
                 </button>`}
                 ${data.average != null ? `
                 <button type="button" class="btn btn-default disabled">
