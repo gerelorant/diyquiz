@@ -435,7 +435,7 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
 
         total = sum([self.points(u) for u in users])
 
-        return (total / (len(users) or 1)) // 0.01
+        return round(total / (len(users) or 1), 2)
 
     def as_dict(
             self,
@@ -497,7 +497,7 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
 
         total = sum([self.points(u) for u in users])
 
-        return (total / (len(users) or 1)) // 0.01
+        return round(total / (len(users) or 1), 2)
 
     def allowed(self, user: User) -> bool:
         if self.closed:
