@@ -27,6 +27,13 @@
       {% block access_control %}
           <ul class="nav navbar-nav navbar-right access-control">
               {% if current_user.is_authenticated %}
+                {% if current_user.has_role('admin') %}
+                    <li>
+                      <a class="btn btn-link" href="{{ url_for('admin.refresh_all') }}">
+                          <span class="glyphicon glyphicon-refresh"></span>
+                      </a>
+                    </li>
+                {% endif %}
                 <li>
                   <a class="btn btn-link" href="{{ url_for('admin.add_section') }}">
                       <span class="glyphicon glyphicon-plus"></span> {{ _('Create section') }}

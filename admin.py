@@ -47,6 +47,15 @@ class IndexView(AdminIndexView):
 
         return self.render('quiz.html', quiz=quiz)
 
+    @expose('/refresh_all')
+    def refresh_all(self):
+        if current_user.has_role('admin'):
+            for ans in md.Answer.query:
+                ans.set_points()
+            md.db.session.commit()
+        
+        return redirect(request.referrer)
+
     @expose('/quiz/<int:quiz_id>/static')
     def quiz_static(self, quiz_id: int):
         quiz = md.Quiz.query.get(quiz_id)
