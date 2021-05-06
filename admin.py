@@ -187,6 +187,7 @@ class IndexView(AdminIndexView):
             for question in section.questions:
                 question.open = False
                 question.closed = True
+        section.calculate_points()
         section.container.last_updated = dt.datetime.utcnow()
         md.db.session.commit()
         return jsonify(None)

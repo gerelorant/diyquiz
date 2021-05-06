@@ -424,7 +424,11 @@ class Section(db.Model, ordered_mixin(Quiz, 'sections')):
 
             return max([self.points(u) for u in users]) if users else 0
 
-        return sum([ans.points for ans in user.answers.join(Question, Section).filter(Section.id == self.id)])
+        return sum([ans.points or 0 for ans in user.answers.join(Question, Section).filter(Section.id == self.id)])
+
+    def calculate_points(self):
+        for answer in Answer.query.join(Question).filter(Question.container_id == self.id):
+            answer.set_points()
 
     @property
     def average(self):
@@ -486,7 +490,7 @@ class Question(db.Model, ordered_mixin(Section, 'questions')):
         backref=db.backref("liked_questions", lazy="dynamic"))
 
     def points(self, user: User) -> float:
-        return sum([ans.points for ans in user.answers.filter_by(question_id=self.id)])
+        return sum([ans.points or 0 for ans in user.answers.filter_by(question_id=self.id)])
 
     @property
     def average(self):
@@ -609,8 +613,9 @@ class Answer(db.Model):
                             lazy='dynamic',
                             cascade='delete, delete-orphan')))
 
-    @property
-    def points(self) -> float:
+    points = db.Column(db.Float, default=0)
+
+    def _calculate_points(self) -> float:
         for value in self.question.values.filter(Value.points <= 0):
             if value.allowed_misses:
                 d = str_distance(value.text, self.value)
@@ -640,3 +645,6 @@ class Answer(db.Model):
                 return value.points
 
         return self.question.base_points
+
+    def set_points(self):
+        self.points = self._calculate_points()
